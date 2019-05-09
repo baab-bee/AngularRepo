@@ -1,0 +1,31 @@
+
+  <form [formGroup] = "donorForm" (ngSubmit) = "onSubmit() ">
+  <br><br>
+  No. of frames to be Donated :<input type="text" formControlName="totalOrderedQty"/>
+  <br><br>
+  <div formGroupName="user" novalidate>
+  Name : <input type="text" formControlName = "name" />
+  <br><br>
+  Email : <input type="text" formControlName="emailId"/>
+  <br><br>
+  Mobile No. : <input type="text" name="mobile" />
+  <br><br>
+  <div formGroupName="address" novalidate>
+  Address1 : <input type="text" formControlName="addressLine1"/>
+  <br><br>
+  Address2 : <input type="text" formControlName="addressLine2" />
+  <br><br>
+  city : <input type="text" formControlName="city" />
+  <br><br>
+  state : <input type="text" formControlName="state"  />
+  <br><br>
+  zipcode : <input type="text" formControlName="zipcode"  />
+  <br><br>
+  country : <input type="text" formControlName="country"  />
+
+  </div> </div>
+  <br><br>
+
+  <button  type="submit"  >Submit</button> &nbsp; &nbsp;  
+  <button  type="reset"  >Cancel</button>
+  </form>
