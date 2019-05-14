@@ -2,12 +2,13 @@
 <form   [formGroup] = "donorComp" (ngSubmit) = "onClickSubmit(donorComp.value)">
   <div class="list-group-item">
     <input type="radio" formControlName="donorCompOpts" value="prepaid_envelope"> I Want a Prepaid Envelope<br>
-  <input type="radio" formControlName="donorCompOpts" value="dropoff_location"> I Want to Dropoff in a location<br>
-  <input type="radio" formControlName="donorCompOpts" value="self_prepaid_envelope"> I will send it in a self paid Envelope<br>
+  <input type="radio" formControlName="donorCompOpts" > I Want to Dropoff in a location<br>
+  <input type="radio" formControlName="donorCompOpts" > I will send it in a self paid Envelope<br>
   </div>
   <br>
-  <button type="submit" [disabled] = "!donorComp.valid">OK</button>
+  <button type="submit" [disabled] = "!donorComp.valid" routerLink="../donor">OK</button>
 </form>
-<p>
+<!--<p>
   Selected value : {{radioSelectedValue}}
 </p>
+-->
