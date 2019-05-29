@@ -3,10 +3,11 @@ import { Observable } from 'rxjs';
 import { UserRequest } from '../donor-input/models/user.request.model';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class UserRequestService {
-    private userRequestUrl = 'http://localhost:8080/userRequests';
+    private userRequestUrl = environment.baseUrl + '/admin/receiveframe/initiated/processed';
 
     constructor(private http: HttpClient) {
 
