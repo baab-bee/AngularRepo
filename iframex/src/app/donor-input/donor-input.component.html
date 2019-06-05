@@ -1,31 +1,76 @@
-
-  <form [formGroup] = "donorForm" (ngSubmit) = "onSubmit() ">
-  <br><br>
-  No. of frames to be Donated :<input type="text" formControlName="totalOrderedQty"/>
-  <br><br>
+<form [formGroup]="donorForm" class="ml-2" (ngSubmit)="onSubmit() ">
+  <div class="form-group">
+    <label for="formFrameCount" class="col-form-label col-form-label-sm">Frame Count</label>
+    <input type="text" class="form-control form-control-sm col-3" id="formFrameCount" formControlName="totalOrderedQty"
+      placeholder="Enter total number of frames" />
+  </div>
   <div formGroupName="user" novalidate>
-  Name : <input type="text" formControlName = "name" />
-  <br><br>
-  Email : <input type="text" formControlName="emailId"/>
-  <br><br>
-  Mobile No. : <input type="text" name="mobile" />
-  <br><br>
-  <div formGroupName="address" novalidate>
-  Address1 : <input type="text" formControlName="addressLine1"/>
-  <br><br>
-  Address2 : <input type="text" formControlName="addressLine2" />
-  <br><br>
-  city : <input type="text" formControlName="city" />
-  <br><br>
-  state : <input type="text" formControlName="state"  />
-  <br><br>
-  zipcode : <input type="text" formControlName="zipcode"  />
-  <br><br>
-  country : <input type="text" formControlName="country"  />
+    <div class="form-group">
+      <label for="formUserName" class="col-form-label col-form-label-sm">User Name</label>
+      <input type="text" class="form-control form-control-sm col-3" id="formUserName" formControlName="name"
+        placeholder="Enter Your Name" />
+    </div>
+    <div class="form-row">
+      <div class="form-group col-3">
+        <label for="forEmail" class="col-form-label col-form-label-sm">Email address</label>
+        <input type="email" class="form-control form-control-sm" id="forEmail" formControlName="emailId"
+          aria-describedby="emailHelp" placeholder="Enter Your Email" />
+        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+      </div>
+      <div class="form-group col-3">
+        <label for="formMobile" class="col-form-label col-form-label-sm">Phone</label>
+        <input type="text" type="text" class="form-control form-control-sm" id="formMobile" name="mobile"
+          placeholder="Enter Your Mobile Number" />
+      </div>
+    </div>
+    <div formGroupName="address" novalidate>
+      <div class="form-group">
+        <label for="formStreet1" class="col-form-label col-form-label-sm">Address</label>
+        <input type="text" class="form-control form-control-sm col-6" id="formStreet1" formControlName="addressLine1"
+          placeholder="Enter Your Street Address" />
+      </div>
+      <div class="form-row">
+        <div class="form-group col-3">
+          <label for="formStreet2" class="col-form-label col-form-label-sm">Address 2</label>
+          <input type="text" class="form-control form-control-sm" id="formStreet2" formControlName="addressLine2"
+            placeholder="Enter Your Street Address 2" />
+        </div>
+        <div class="form-group col-3">
+          <label for="formcity" class="col-form-label col-form-label-sm">City</label>
+          <input type="text" class="form-control form-control-sm" id="formcity" formControlName="city"
+            placeholder="Enter Your City" />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-3">
 
-  </div> </div>
-  <br><br>
+          <label for="formState" class="col-form-label col-form-label-sm">State</label>
+          <input type="text" class="form-control form-control-sm" id="formState" formControlName="state"
+            placeholder="Enter your State" />
 
-  <button  type="submit"  >Submit</button> &nbsp; &nbsp;  
-  <button  type="reset"  >Cancel</button>
-  </form>
+        </div>
+        <div class="form-group col-3">
+          <label for="formZip" class=" col-form-label col-form-label-sm">ZIP/Postal Code</label>
+          <input type="text" class="form-control form-control-sm" id="formZip" formControlName="zipcode"
+            placeholder="Enter your Postal COde" />
+        </div>
+        <div class="form-group col-3">
+          <label for="formCountry" class="col-form-label col-form-label-sm">Country</label>
+          <input type="text" class="form-control form-control-sm" id="formCountry" formControlName="country"
+            placeholder="Enter your Country" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <button type="submit" class="btn btn-primary  ml-3">Submit</button>
+  <button type="reset" class="btn btn-primary  ml-3">Cancel</button>
+  <div class="row"  *ngIf="showMsg">
+      <div  #alert class="alert alert-success alert-dismissible fade show" role="alert">
+          <strong>Success! Data Submitted Successfully!</strong>
+          <button type="button" class="close" aria-label="Close" (click)="closeAlert()"> 
+            <span aria-hidden="true">&times;</span></button> 
+    </div>
+  </div>
+</form>
