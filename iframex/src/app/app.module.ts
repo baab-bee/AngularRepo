@@ -10,6 +10,7 @@ import {HttpClientModule }  from '@angular/common/http';
 import { AgGridModule } from 'ag-grid-angular';
 import { AdminComponent } from './admin/admin.component';
 import { ProcessDonorEnvelopeComponent } from './process-donor-envelope/process-donor-envelope.component';
+import { BenefInputComponent } from './benef-input/benef-input.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ProcessDonorEnvelopeComponent } from './process-donor-envelope/process-
     DonorInputComponent,
     DonorComponent,
     AdminComponent,
-    ProcessDonorEnvelopeComponent
+    ProcessDonorEnvelopeComponent,
+    BenefInputComponent
   ],
   imports: [
     BrowserModule,
