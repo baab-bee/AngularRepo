@@ -6,6 +6,8 @@ import { AdminComponent } from './admin/admin.component';
 import { DonorComponent } from './donor/donor.component';
 import { ProcessDonorEnvelopeComponent } from './process-donor-envelope/process-donor-envelope.component';
 import { BenefInputComponent } from './benef-input/benef-input.component';
+import { ReceiveAndValidateComponent } from './ReceiveAndValidate/ReceiveAndValidate.component';
+import { processDonationRequest } from './processDonationRequest/processDonationRequest.component';
 
 const routes: Routes = [
   {path:'', redirectTo:'/home', pathMatch:'full'},
@@ -14,7 +16,9 @@ const routes: Routes = [
   {path:'admin', component:AdminComponent},
   {path:'donor-opts', component:DonorComponent},
   {path:'sendEnvelope', component:ProcessDonorEnvelopeComponent},
-  {path:'beneficiary', component:BenefInputComponent}
+  {path:'beneficiary', component:BenefInputComponent},
+  {path:'receiveAndValidate', component:ReceiveAndValidateComponent},
+  {path:'processDonationRequest', component:processDonationRequest}
 ];
 
 @NgModule({

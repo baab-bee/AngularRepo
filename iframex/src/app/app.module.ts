@@ -11,6 +11,9 @@ import { AgGridModule } from 'ag-grid-angular';
 import { AdminComponent } from './admin/admin.component';
 import { ProcessDonorEnvelopeComponent } from './process-donor-envelope/process-donor-envelope.component';
 import { BenefInputComponent } from './benef-input/benef-input.component';
+import { ReceiveAndValidateComponent } from './ReceiveAndValidate/ReceiveAndValidate.component';
+import { processDonationRequest } from './processDonationRequest/processDonationRequest.component';
+
 
 @NgModule({
   declarations: [
@@ -20,7 +23,9 @@ import { BenefInputComponent } from './benef-input/benef-input.component';
     DonorComponent,
     AdminComponent,
     ProcessDonorEnvelopeComponent,
-    BenefInputComponent
+    BenefInputComponent,
+    ReceiveAndValidateComponent,
+    processDonationRequest
   ],
   imports: [
     BrowserModule,
