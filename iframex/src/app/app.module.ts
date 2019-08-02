@@ -13,6 +13,9 @@ import { ProcessDonorEnvelopeComponent } from './process-donor-envelope/process-
 import { BenefInputComponent } from './benef-input/benef-input.component';
 import { ReceiveAndValidateComponent } from './ReceiveAndValidate/ReceiveAndValidate.component';
 import { processDonationRequest } from './processDonationRequest/processDonationRequest.component';
+import { ProcessFrameRequestComponent } from './process-frame-request/process-frame-request.component';
+import { MatchFrameComponent } from './match-frame/match-frame.component';
+import { MatchFrameServiceComponent } from './match-frame-service/match-frame-service.component';
 
 
 @NgModule({
@@ -25,8 +28,12 @@ import { processDonationRequest } from './processDonationRequest/processDonation
     ProcessDonorEnvelopeComponent,
     BenefInputComponent,
     ReceiveAndValidateComponent,
-    processDonationRequest
+    processDonationRequest,
+    ProcessFrameRequestComponent,
+    MatchFrameComponent,
+    MatchFrameServiceComponent
   ],
+  entryComponents: [MatchFrameComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

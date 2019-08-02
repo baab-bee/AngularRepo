@@ -8,6 +8,8 @@ import { ProcessDonorEnvelopeComponent } from './process-donor-envelope/process-
 import { BenefInputComponent } from './benef-input/benef-input.component';
 import { ReceiveAndValidateComponent } from './ReceiveAndValidate/ReceiveAndValidate.component';
 import { processDonationRequest } from './processDonationRequest/processDonationRequest.component';
+import { ProcessFrameRequestComponent } from './process-frame-request/process-frame-request.component';
+import { MatchFrameServiceComponent } from './match-frame-service/match-frame-service.component';
 
 const routes: Routes = [
   {path:'', redirectTo:'/home', pathMatch:'full'},
@@ -18,7 +20,9 @@ const routes: Routes = [
   {path:'sendEnvelope', component:ProcessDonorEnvelopeComponent},
   {path:'beneficiary', component:BenefInputComponent},
   {path:'receiveAndValidate', component:ReceiveAndValidateComponent},
-  {path:'processDonationRequest', component:processDonationRequest}
+  {path:'processFrame', component:ProcessFrameRequestComponent},
+  {path:'processDonationRequest', component:processDonationRequest},
+  {path:'matchFrame', component: MatchFrameServiceComponent}
 ];
 
 @NgModule({
