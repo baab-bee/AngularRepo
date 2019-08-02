@@ -75,7 +75,7 @@ export class BenefInputComponent implements OnInit {
       // result.user.address = Object.assign({}, result.user.address);
   
       console.log("Form Model is"+JSON.stringify(this.addForm.value));
-     let url = this.baseUrl+ 'userRequests';
+     let url = this.baseUrl+ 'beneficiaryRequests';
      let observer = this.http.post(url,this.addForm.value,{headers : new HttpHeaders({ 'Content-Type': 'application/json' })});
      observer.subscribe((response) => { this.response = response;
       console.log("recieved" +JSON.stringify(this.response));
