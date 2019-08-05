@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'http://localhost:8084/'
+  baseUrl: 'https://iframex-api.herokuapp.com/'
 };
 
 /*
