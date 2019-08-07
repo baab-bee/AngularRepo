@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule} from '@angular/forms';
+import { ReactiveFormsModule, FormsModule} from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -13,6 +13,9 @@ import { ProcessDonorEnvelopeComponent } from './process-donor-envelope/process-
 import { BenefInputComponent } from './benef-input/benef-input.component';
 import { ReceiveAndValidateComponent } from './ReceiveAndValidate/ReceiveAndValidate.component';
 import { processDonationRequest } from './processDonationRequest/processDonationRequest.component';
+import { ProcessFrameRequestComponent } from './process-frame-request/process-frame-request.component';
+import { MatchFrameComponent } from './match-frame/match-frame.component';
+import { MatchFrameServiceComponent } from './match-frame-service/match-frame-service.component';
 
 
 @NgModule({
@@ -25,14 +28,19 @@ import { processDonationRequest } from './processDonationRequest/processDonation
     ProcessDonorEnvelopeComponent,
     BenefInputComponent,
     ReceiveAndValidateComponent,
-    processDonationRequest
+    processDonationRequest,
+    ProcessFrameRequestComponent,
+    MatchFrameComponent,
+    MatchFrameServiceComponent
   ],
+  entryComponents: [MatchFrameComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    AgGridModule
+    AgGridModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

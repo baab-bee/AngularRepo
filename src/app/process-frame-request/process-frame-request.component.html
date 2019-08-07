@@ -1,0 +1,20 @@
+<div style="height: 100%; padding-top: 35px; box-sizing: border-box;">
+  <ag-grid-angular
+    #agGrid
+    style="width: 1200px; height: 500px;"
+    id="myGrid"
+    class="ag-theme-balham"
+    [columnDefs]="columnDefs"
+    [defaultColDef]="defaultColDef"
+    [enableSorting]="true"
+    [enableFilter]="true"
+    [pagination]="true"
+    [suppressRowClickSelection]="true"
+    [rowSelection]="rowSelection"
+    (selectionChanged)="onSelectionChanged($event)"
+    (gridReady)="onGridReady($event)"
+    [rowData]="rowData"
+    [frameworkComponents]="frameworkComponents"
+  ></ag-grid-angular>
+</div>
+

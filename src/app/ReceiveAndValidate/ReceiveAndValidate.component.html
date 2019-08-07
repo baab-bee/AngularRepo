@@ -3,60 +3,102 @@
     <div class="container">
         <div class="form-group">
             <label for="fname">Frame Name:</label>
-            <input type="name" class="form-control" id="fname" placeholder="Enter name" name="fname">
+            <input type="text" class="form-control" id="fname" placeholder="Enter name" name="fname"
+                [(ngModel)]="frameName">
         </div>
         <div class="form-group">
             <label for="pwd">UserRequestID:</label>
-            <input type="id" class="form-control" id="id" placeholder="Enter ID" name="id">
+            <input type="id" class="form-control" id="id" placeholder="Enter ID" name="id" [(ngModel)]="userRequestId">
         </div>
         <div class="form-group">
-        <div class="dropdown">
-            <select class="btn btn-primary dropdown-toggle" >
-                <option value="">--Size--</option>
-                <option value="small">Small</option>
-                <option value="medium">Medium</option>
-                <option value="large">Large</option>
-            </select>
+            <div class="dropdown">
+                <label>Frame Size:</label>
+                <select  [(ngModel)]="size">
+                    <option value="small">Small</option>
+                    <option value="medium">Medium</option>
+                    <option value="large">Large</option>
+                </select>
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <div class="dropdown">
-            <select class="btn btn-primary dropdown-toggle" >
-                <option value="">--color--</option>
-                <option value="small">Black</option>
-                <option value="medium">Silver</option>
-                <option value="large">Gold</option>
-                <option value="large">Brown</option>
-            </select>
+        <div class="form-group">
+            <div class="dropdown">
+                <label>Frame Color:</label>
+                <select  [(ngModel)]="color">
+                    <option value="small">Black</option>
+                    <option value="medium">Silver</option>
+                    <option value="large">Gold</option>
+                    <option value="large">Brown</option>
+                </select>
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <div class="dropdown">
-            <select class="btn btn-primary dropdown-toggle" >
-                <option value="">--Material--</option>
-                <option value="small">Fiber</option>
-                <option value="medium">Metal</option>
-            </select>
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="dropdown">
-            <select class="btn btn-primary dropdown-toggle" >
-                <option value="">--Gender--</option>
-                <option value="small">Male</option>
-                <option value="medium">Female</option>
-            </select>
-        </div>
-    </div>
+        <div class="form-group">
+            <div class="dropdown">
+                <label>Material: </label>
+                <select  [(ngModel)]="material">
 
+                    <option value="small">Fiber</option>
+                    <option value="medium">Metal</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="dropdown">
+                <label>Gender: </label>
+                <select  [(ngModel)]="gender">
 
+                    <option value="small" selected>Male</option>
+                    <option value="medium">Female</option>
+                </select>
+            </div>
+        </div>
         <div class="form-group">
             <label for="comment">Description:</label>
-            <textarea class="form-control" rows="5" id="comment"></textarea>
+            <textarea class="form-control" rows="5" id="comment" [(ngModel)]="description"></textarea>
         </div>
-        <button type="submit" class="btn btn-primary">OK</button>
+
+        <div id="table-scroll">
+            <table class="table">
+                <thead class="thead-light">
+                    <!-- <label   class="col-form-label">Frame Details</label> -->
+                    <tr>
+                        <button (click)="onAddFrame()" *ngIf="addForm.get('frameRequests')">Add Frame</button>
+                    </tr>
+                    <tr>
+                        <th>Frame Name</th>
+                        <th>User Req ID</th>
+                        <th>Gender</th>
+                        <th>Size</th>
+                        <th>Color</th>
+                        <th>Material</th>
+                        <th>Description</th>
+                    </tr>
+
+                </thead>
+                <tbody>
+                    <tr *ngFor="let frame of frames">
+                        <td>{{ frame.frameName }}</td>
+                        <td>{{ frame.userRequestId }}</td>
+                        <td>{{ frame.gender }}</td>
+                        <td>{{ frame.size }}</td>
+                        <td>{{ frame.color }}</td>
+                        <td>{{ frame.material }}</td>
+                        <td>{{ frame.description }}</td>
+                        <td>
+                            <button (click)="onRemoveFrame(frame)">Remove</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+
+
+
+
+        <button type="submit" class="btn btn-primary" (click)="validateFrames()">Validate</button>
+
 
     </div>
-
 
 </body>

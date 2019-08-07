@@ -51,13 +51,18 @@ export class BenefInputComponent implements OnInit {
 
   onAddRow() {
     this.rows.push(this.createItemFormGroup());
+    
   }
-
+  scrollWin(){
+    window.scrollBy(0,10);
+  }
+   
   onRemoveRow(rowIndex:number){
     this.rows.removeAt(rowIndex);
   }
 
   createItemFormGroup(): FormGroup {
+    this.scrollWin();
     return this.fb.group({
       gender: null,
       size: null,
@@ -75,7 +80,7 @@ export class BenefInputComponent implements OnInit {
       // result.user.address = Object.assign({}, result.user.address);
   
       console.log("Form Model is"+JSON.stringify(this.addForm.value));
-     let url = this.baseUrl+ 'userRequests';
+     let url = this.baseUrl+ 'beneficiaryRequests';
      let observer = this.http.post(url,this.addForm.value,{headers : new HttpHeaders({ 'Content-Type': 'application/json' })});
      observer.subscribe((response) => { this.response = response;
       console.log("recieved" +JSON.stringify(this.response));

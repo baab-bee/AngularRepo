@@ -81,7 +81,7 @@ closeAlert() {
     result.user.address = Object.assign({}, result.user.address);
 
     console.log("Form Model is"+JSON.stringify(result));
-   let url = this.baseUrl+ 'userRequests';
+   let url = this.baseUrl+ 'donorRequests';
    let observer = this.http.post(url,result,{headers : new HttpHeaders({ 'Content-Type': 'application/json' })});
    observer.subscribe((response) => { this.response = response;
     console.log("recieved" +JSON.stringify(this.response));
