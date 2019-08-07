@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule} from '@angular/forms';
+import { ReactiveFormsModule, FormsModule} from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -39,7 +39,8 @@ import { MatchFrameServiceComponent } from './match-frame-service/match-frame-se
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    AgGridModule
+    AgGridModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

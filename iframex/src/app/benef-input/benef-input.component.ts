@@ -51,13 +51,18 @@ export class BenefInputComponent implements OnInit {
 
   onAddRow() {
     this.rows.push(this.createItemFormGroup());
+    
   }
-
+  scrollWin(){
+    window.scrollBy(0,10);
+  }
+   
   onRemoveRow(rowIndex:number){
     this.rows.removeAt(rowIndex);
   }
 
   createItemFormGroup(): FormGroup {
+    this.scrollWin();
     return this.fb.group({
       gender: null,
       size: null,
