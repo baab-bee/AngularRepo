@@ -3,6 +3,6 @@ export class Address {
     addressLine2:String ='';
     city:String='';
     state:String='';
-    zipcode:number=0;
+    zipcode:number;
     country:String='';
 }
