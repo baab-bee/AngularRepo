@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserRequest } from '../donor-input/models/user.request.model';
+import { DonorRequest } from '../donor-input/models/donor.request.model';
 import { ColDef } from 'ag-grid-community';
 import { HttpClient } from '@angular/common/http';
 import { UserRequestService } from './user-request-service';
@@ -11,7 +11,7 @@ import { UserRequestService } from './user-request-service';
   providers: [UserRequestService]
 })
 export class ProcessDonorEnvelopeComponent implements OnInit {
-  private rowData: UserRequest;
+  private rowData: DonorRequest;
   private columnDefs: ColDef[];
   private defaultColDef;
   private rowSelection;

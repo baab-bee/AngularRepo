@@ -1,93 +1,87 @@
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { User } from './models/user.model';
-import { UserRequest } from './models/user.request.model';
-import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
+import { DonorRequest } from './models/donor.request.model';
+import { FormGroup, FormControl, FormBuilder, Validators  } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Address } from './models/address.model';
 import { environment } from '../../environments/environment';
+import { NGXLogger } from 'ngx-logger';
+import { DonRequestService } from './donor-request-service';
+
 
 @Component({
   selector: 'app-donor-input',
   templateUrl: './donor-input.component.html',
-  styleUrls: ['./donor-input.component.css']
+  styleUrls: ['./donor-input.component.css'],
+  providers:[DonRequestService]
 })
 export class DonorInputComponent implements OnInit {
- donorForm:FormGroup;
- response:any;
- baseUrl = environment.baseUrl;
- showMsg: boolean = false;
- @ViewChild('alert') alert: ElementRef;
-  constructor(private formBuilder: FormBuilder, private http:HttpClient) { 
-   // this.donorForm =this.createFormGroup();
-  this.donorForm = this.createFormGroupWithBuilderAndModel(formBuilder);
+  donorForm: FormGroup;
+  response: any;
+  baseUrl = environment.baseUrl;
+  showMsg: boolean = false;
+  submitted = false;
+  @ViewChild('alert') alert: ElementRef;
+  constructor(private formBuilder: FormBuilder, private donService: DonRequestService, private logger: NGXLogger) {
+    //Creating the form group with model
+  
   }
 
   ngOnInit() {
-
+    this.donorForm = this.createFormGroupWithBuilderAndModel(this.formBuilder);
   }
-  createFormGroup() {
-    return new FormGroup({
-      userRequestType: new FormControl(),
-      totalOrderedQty: new FormControl(),
-      remarks: new FormControl(),
-      user: new FormGroup({
-        name: new FormControl(),
-        emailId: new FormControl(),
-        mobile: new FormControl(),
-        address: new FormGroup({
-          addressLine1: new FormControl(),
-          addressLine2: new FormControl(),
-          city: new FormControl(),
-          state: new FormControl(),
-          zipcode: new FormControl(),
-          country: new FormControl(),
+  // This method instantiate the donor form
+  createFormGroupWithBuilderAndModel(formBuilder: FormBuilder) {
+    return formBuilder.group({
+      envelopeSize: [''] ,
+      status: 'DON_REQ_INITIATED',
+      user: formBuilder.group({
+        name: ['', Validators.required] ,
+        emailId: ['',Validators.email],
+        mobile: ['',Validators.maxLength(10)],
+        address: formBuilder.group({
+          addressLine1:['', Validators.required ] ,
+          addressLine2:['' ] ,
+          city:['', Validators.required ] ,
+          state:['', Validators.required ] ,
+          zipcode:['', Validators.required] ,
+          country:['', Validators.required ]
         })
       })
     });
   }
-  createFormGroupWithBuilderAndModel(formBuilder: FormBuilder) {
-    return formBuilder.group({
-      userRequestType:'D',
-      totalOrderedQty:'',
-      remarks:'',
-      user: formBuilder.group({
-        name: '',
-        emailId: '',
-        mobile: '',
-        address: formBuilder.group(new Address())})
-    });
+
+  get f() {return this.donorForm.get('user.name');}
+  get g() {return this.donorForm.get('user.emailId');}
+  get j() {return this.donorForm.get('user.mobile');}
+  get h() {return this.donorForm.get('user.address.addressLine1');}
+  get k() {return this.donorForm.get('user.address.city');}
+  get l() {return this.donorForm.get('user.address.state');}
+  get m() {return this.donorForm.get('user.address.zipcode');}
+  get n() {return this.donorForm.get('user.address.country');}
+
+  closeAlert() {
+    this.alert.nativeElement.classList.remove('show');
+  }
+  onSubmit() {
+    this.submitted =true;
+    if (this.donorForm.invalid) {
+      return;
   }
 
-/*
-  onClickSubmit(data) {
-    this.donor.totalOrderedQty = data.frameCount;
-    this.donor.userRequestType = "D";
-    this.user.name = data.name;
-    this.user.emailId = data.email;
-    this.user.mobile = data.mobile;
-    this.address.addressLine1 = data.addressLine1;
-    this.user.address = this.address;
-    this.donor.user = this.user;
-    console.log("Helloozczc" + JSON.stringify(this.donor));
-  }
-*/
-
-closeAlert() {
-  this.alert.nativeElement.classList.remove('show');
-}
-  onSubmit(){
-    const result: UserRequest = Object.assign({}, this.donorForm.value);
-    result.user= Object.assign({}, result.user);
+    const result: DonorRequest = Object.assign({}, this.donorForm.value);
+    result.user = Object.assign({}, result.user);
     result.user.address = Object.assign({}, result.user.address);
-
-    console.log("Form Model is"+JSON.stringify(result));
-   let url = this.baseUrl+ 'donorRequests';
-   let observer = this.http.post(url,result,{headers : new HttpHeaders({ 'Content-Type': 'application/json' })});
-   observer.subscribe((response) => { this.response = response;
-    console.log("recieved" +JSON.stringify(this.response));
-    this.showMsg = true;
-            });
-
-
+    this.logger.debug("Donor Form is::" + JSON.stringify(result));
+    // let url = this.baseUrl+ 'donorRequests';
+    // this.logger.debug("Donor Form Post URL is::"+url);
+    let observer = this.donService.createDonRequest(result);
+    // let observer = this.http.post(url,result,{headers : new HttpHeaders({ 'Content-Type': 'application/json' })});
+    observer.subscribe((response) => {
+      this.response = response;
+      this.logger.debug("recieved" + JSON.stringify(this.response));
+      //error handling 
+      this.showMsg = true;
+    });
   }
 }

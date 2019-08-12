@@ -4,6 +4,7 @@ import { ReactiveFormsModule, FormsModule} from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
+import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
 import { DonorInputComponent } from './donor-input/donor-input.component';
 import { DonorComponent } from './donor/donor.component';
 import {HttpClientModule }  from '@angular/common/http';
@@ -40,7 +41,11 @@ import { MatchFrameServiceComponent } from './match-frame-service/match-frame-se
     ReactiveFormsModule,
     HttpClientModule,
     AgGridModule,
-    FormsModule
+    FormsModule,
+    LoggerModule.forRoot({
+      level: NgxLoggerLevel.TRACE,
+      disableConsoleLogging: false
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
