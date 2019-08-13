@@ -1,6 +1,6 @@
 
 import { Observable } from 'rxjs';
-import { UserRequest } from '../donor-input/models/user.request.model';
+import { DonorRequest } from '../donor-input/models/donor.request.model';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
@@ -13,7 +13,7 @@ export class UserRequestService {
 
     }
 
-    findAll() :Observable<UserRequest>{
-        return this.http.get<UserRequest>(this.userRequestUrl, {headers : new HttpHeaders({ 'Content-Type': 'application/json' })});
+    findAll() :Observable<DonorRequest>{
+        return this.http.get<DonorRequest>(this.userRequestUrl, {headers : new HttpHeaders({ 'Content-Type': 'application/json' })});
         };
     }
