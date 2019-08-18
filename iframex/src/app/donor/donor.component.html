@@ -3,15 +3,15 @@
 
 <form   [formGroup] = "donorComp" class="form-list-radio" (ngSubmit) = "onClickSubmit(donorComp.value)">
   <div class="custom-control custom-radio">
-    <input type="radio" class="custom-control-input"  name="exampleRadios" formControlName="donorCompOpts" id="exampleRadios1" value="prepaid_envelope"> 
+    <input type="radio" class="custom-control-input"   formControlName="donorCompOpts" id="exampleRadios1" value="prepaid_envelope"> 
     <label class="custom-control-label" for="exampleRadios1"> I Want a Prepaid Envelope </label>
   </div>
   <div class="custom-control custom-radio">
-  <input type="radio" class="custom-control-input"  name="exampleRadios" formControlName="donorCompOpts" id="exampleRadios2" value="dropoff_location">
+  <input type="radio" class="custom-control-input"   formControlName="donorCompOpts" id="exampleRadios2" value="dropoff_location">
   <label class="custom-control-label" for="exampleRadios2"> I Want to Dropoff in a location </label>
   </div>
   <div class="custom-control custom-radio">
-  <input type="radio" class="custom-control-input"   name="exampleRadios" formControlName="donorCompOpts" id="exampleRadios3" value="selfpaid_envelope"> 
+  <input type="radio" class="custom-control-input"    formControlName="donorCompOpts" id="exampleRadios3" value="selfpaid_envelope"> 
   <label class="custom-control-label" for="exampleRadios3"> I will send it in a self paid Envelope </label>
   
   </div>

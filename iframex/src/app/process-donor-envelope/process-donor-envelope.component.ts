@@ -3,6 +3,7 @@ import { DonorRequest } from '../donor-input/models/donor.request.model';
 import { ColDef } from 'ag-grid-community';
 import { HttpClient } from '@angular/common/http';
 import { UserRequestService } from './user-request-service';
+import { NGXLogger } from 'ngx-logger';
 
 @Component({
   selector: 'app-process-donor-envelope',
@@ -17,83 +18,79 @@ export class ProcessDonorEnvelopeComponent implements OnInit {
   private rowSelection;
   private gridApi;
   private gridColumnApi;
+  private getRowHeight;
 
-    constructor(private userRequest: UserRequestService) {
-      this.columnDefs = this.createColumnDefs();
-      this.rowSelection = "multiple";
-    }
-      // this.http.get('http://localhost:8080/userRequests').subscribe((data)=>{
-
-    // this.rowData=data;
+  constructor(private userRequest: UserRequestService, private logger: NGXLogger) {
+    this.columnDefs = this.createColumnDefs();
+    this.rowSelection = "multiple";
+    // var allColumnIds = [];
+    // this.gridColumnApi.getAllColumns().forEach(function(column) {
+    //   allColumnIds.push(column.colId);
     // });
-    ngOnInit() {
+    // this.gridColumnApi.autoSizeColumns(allColumnIds);
+
+    this.getRowHeight = function (params) {
+      var address = params.data.user.address;
+      var length = address.addressLine1.length + address.addressLine2.length + address.city.length +address.state.length+address.zipcode.length+address.country.length;
+      return 28 * (Math.floor(length / 60) + 1);
+    };
+  }
+
+  ngOnInit() {
     this.userRequest.findAll().subscribe(
       UserRequest => {
         this.rowData = UserRequest
       },
       error => {
-        console.log(error);
+        this.logger.debug("Error recieved" + JSON.stringify(error));
       }
     )
-   }
+  }
 
-   onSelectionChanged() {
+  onSelectionChanged() {
     var selectedRows = this.gridApi.getSelectedRows();
-    console.log("Hello" + selectedRows);
+    this.logger.debug("Selected rows" + selectedRows);
+  }
+  markAsSent(){
+    var selectedRows = this.gridApi.getSelectedRows();
+    this.logger.debug("Selected rows" + selectedRows);
+    window.alert("SelectedRows"+selectedRows);
   }
 
   onGridReady(params) {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
     this.gridApi.sizeColumnsToFit();
+
   }
 
   private createColumnDefs() {
     return [
-      { field: 'id' ,   checkboxSelection: true },
-      { field: 'status' },
+      { field: 'id', headerName: 'DonorRequestId', resizable: false, checkboxSelection: true },
+      { field: 'status', headerName: 'Status', resizable: false },
       {
-        field: 'name', valueGetter: (params) => {
+        field: 'name', headerName: 'Name', resizable: false, valueGetter: (params) => {
           if (!params.data.user) return '';
           return params.data.user.name;
         }
       },
       {
-        field: 'addressLine1', valueGetter: (params) => {
+        field: 'addressLine1', headerName: 'Address', width:450, resizable: true, cellStyle: { "white-space": "normal" }, valueGetter: (params) => {
           if (!params.data.user || !params.data.user.address || !params.data.user.address.addressLine1) return '';
-          return params.data.user.address.addressLine1;
-        }
-      }, 
-      {
-        field: 'addressLine2', valueGetter: (params) => {
+          let addressLine1 = params.data.user.address.addressLine1;
           if (!params.data.user || !params.data.user.address || !params.data.user.address.addressLine2) return '';
-          return params.data.user.address.addressLine2;
-        }
-      },
-      {
-        field: 'city', valueGetter: (params) => {
+          let addressLine2 = params.data.user.address.addressLine2;
           if (!params.data.user || !params.data.user.address || !params.data.user.address.city) return '';
-          return params.data.user.address.city;
-        }
-      },
-      {
-        field: 'state', valueGetter: (params) => {
+          let city = params.data.user.address.city;
           if (!params.data.user || !params.data.user.address || !params.data.user.address.state) return '';
-          return params.data.user.address.state;
-        }
-      },
-      {
-        field: 'country', valueGetter: (params) => {
+          let state = params.data.user.address.state;
           if (!params.data.user || !params.data.user.address || !params.data.user.address.country) return '';
-          return params.data.user.address.country;
-        }
-      },
-      {
-        field: 'zipcode', valueGetter: (params) => {
+          let country = params.data.user.address.country;
           if (!params.data.user || !params.data.user.address || !params.data.user.address.zipcode) return '';
-          return params.data.user.address.zipcode;
+          let zipcode = params.data.user.address.zipcode;
+          return addressLine1 + "\n" + addressLine2 + "\n" + city + "\n" + state + "\n" + country + "\n" + zipcode;
         }
-      } 
+      }
     ]
   }
 }
