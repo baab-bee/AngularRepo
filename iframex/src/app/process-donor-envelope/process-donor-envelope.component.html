@@ -1,4 +1,7 @@
-<div style="height: 100%; padding-top: 35px; box-sizing: border-box;">
+<div style="padding-top: 10px;padding-left: 870px;">
+  <button  type="button" (click)="markAsSent()" class="btn btn-outline-secondary">Mark it as Sent</button>
+</div>
+<div style="height: 100%; padding-top: 10px; box-sizing: border-box;">
   <ag-grid-angular
     #agGrid
     style="width: 1000px; height: 600px;"
@@ -9,10 +12,12 @@
     [enableSorting]="true"
     [enableFilter]="true"
     [pagination]="true"
-    [suppressRowClickSelection]="true"
+    [enableCellTextSelection]="true"
     [rowSelection]="rowSelection"
+    [getRowHeight]="getRowHeight"
     (selectionChanged)="onSelectionChanged($event)"
     (gridReady)="onGridReady($event)"
     [rowData]="rowData"
   ></ag-grid-angular>
 </div>
+

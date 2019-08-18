@@ -7,8 +7,7 @@ import { environment } from '../../environments/environment';
 
 @Injectable()
 export class UserRequestService {
-    private userRequestUrl = environment.baseUrl + 'donorRequests/search?status=initiated,processed';
-
+    private userRequestUrl = environment.baseUrl + 'donorRequests/search?status=DON_REQ_INITIATED,DON_REQ_PROCESSED';
     constructor(private http: HttpClient) {
 
     }
