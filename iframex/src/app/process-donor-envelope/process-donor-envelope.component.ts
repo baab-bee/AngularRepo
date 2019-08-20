@@ -2,14 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { DonorRequest } from '../donor-input/models/donor.request.model';
 import { ColDef } from 'ag-grid-community';
 import { HttpClient } from '@angular/common/http';
-import { UserRequestService } from './user-request-service';
+import { DonRequestService } from '../donor-input/donor-request-service';
 import { NGXLogger } from 'ngx-logger';
 
 @Component({
   selector: 'app-process-donor-envelope',
   templateUrl: './process-donor-envelope.component.html',
   styleUrls: ['./process-donor-envelope.component.css'],
-  providers: [UserRequestService]
+  providers: [DonRequestService]
 })
 export class ProcessDonorEnvelopeComponent implements OnInit {
   private rowData: DonorRequest;
@@ -19,27 +19,21 @@ export class ProcessDonorEnvelopeComponent implements OnInit {
   private gridApi;
   private gridColumnApi;
   private getRowHeight;
-
-  constructor(private userRequest: UserRequestService, private logger: NGXLogger) {
+  constructor(private donRequest: DonRequestService, private logger: NGXLogger) {
     this.columnDefs = this.createColumnDefs();
-    this.rowSelection = "multiple";
-    // var allColumnIds = [];
-    // this.gridColumnApi.getAllColumns().forEach(function(column) {
-    //   allColumnIds.push(column.colId);
-    // });
-    // this.gridColumnApi.autoSizeColumns(allColumnIds);
+    this.rowSelection = "single";
 
     this.getRowHeight = function (params) {
       var address = params.data.user.address;
-      var length = address.addressLine1.length + address.addressLine2.length + address.city.length +address.state.length+address.zipcode.length+address.country.length;
+      var length = address.addressLine1.length + address.addressLine2.length + address.city.length + address.state.length + address.zipcode.length + address.country.length;
       return 28 * (Math.floor(length / 60) + 1);
     };
   }
 
   ngOnInit() {
-    this.userRequest.findAll().subscribe(
-      UserRequest => {
-        this.rowData = UserRequest
+    this.donRequest.findByStatus().subscribe(
+      DonorRequest => {
+        this.rowData = DonorRequest
       },
       error => {
         this.logger.debug("Error recieved" + JSON.stringify(error));
@@ -47,15 +41,36 @@ export class ProcessDonorEnvelopeComponent implements OnInit {
     )
   }
 
-  onSelectionChanged() {
+  /*
+  Invokes the Patch Donor Request Rest API 
+  */
+  markAsSent() {
     var selectedRows = this.gridApi.getSelectedRows();
     this.logger.debug("Selected rows" + selectedRows);
+    // Invoking Patch rest API,
+    // Updating the status as "DON_REQ_PREPAID_SENT"
+    var logger = this.logger;
+    var donRequest = this.donRequest;
+    var gridApi = this.gridApi;
+    var isMarkAsSent = false;
+    selectedRows.forEach(function (selectedRow, index) {
+      logger.debug("selected Id" + selectedRow.id);
+      let observer = donRequest.updateStatus(selectedRow.id);
+      observer.subscribe((data: DonorRequest) => {
+        //selected rows  will be removed from grid
+        gridApi.updateRowData({ remove: selectedRows });
+        var status = data["status"];
+        logger.debug("Status" + status);
+        logger.debug("Response  recieved" + JSON.stringify(data));
+      },
+        error => {
+          logger.debug("Error recieved" + JSON.stringify(error));
+        }
+      )
+    });
+  
   }
-  markAsSent(){
-    var selectedRows = this.gridApi.getSelectedRows();
-    this.logger.debug("Selected rows" + selectedRows);
-    window.alert("SelectedRows"+selectedRows);
-  }
+
 
   onGridReady(params) {
     this.gridApi = params.api;
@@ -66,7 +81,7 @@ export class ProcessDonorEnvelopeComponent implements OnInit {
 
   private createColumnDefs() {
     return [
-      { field: 'id', headerName: 'DonorRequestId', resizable: false, checkboxSelection: true },
+      { field: 'id', headerName: 'Donor Request ID', resizable: false, checkboxSelection: true },
       { field: 'status', headerName: 'Status', resizable: false },
       {
         field: 'name', headerName: 'Name', resizable: false, valueGetter: (params) => {
@@ -75,20 +90,18 @@ export class ProcessDonorEnvelopeComponent implements OnInit {
         }
       },
       {
-        field: 'addressLine1', headerName: 'Address', width:450, resizable: true, cellStyle: { "white-space": "normal" }, valueGetter: (params) => {
-          if (!params.data.user || !params.data.user.address || !params.data.user.address.addressLine1) return '';
-          let addressLine1 = params.data.user.address.addressLine1;
-          if (!params.data.user || !params.data.user.address || !params.data.user.address.addressLine2) return '';
-          let addressLine2 = params.data.user.address.addressLine2;
-          if (!params.data.user || !params.data.user.address || !params.data.user.address.city) return '';
-          let city = params.data.user.address.city;
-          if (!params.data.user || !params.data.user.address || !params.data.user.address.state) return '';
-          let state = params.data.user.address.state;
-          if (!params.data.user || !params.data.user.address || !params.data.user.address.country) return '';
-          let country = params.data.user.address.country;
-          if (!params.data.user || !params.data.user.address || !params.data.user.address.zipcode) return '';
-          let zipcode = params.data.user.address.zipcode;
-          return addressLine1 + "\n" + addressLine2 + "\n" + city + "\n" + state + "\n" + country + "\n" + zipcode;
+        field: 'addressLine1', headerName: 'Address', width: 450, resizable: true, cellStyle: { "white-space": "normal" }, valueGetter: (params) => {
+
+          if (params.data.user && params.data.user.address) {
+            var addr = params.data.user.address;
+            let addressLine1 = addr.addressLine1 ? addr.addressLine1 : '';
+            let addressLine2 = addr.addressLine2 ? addr.addressLine2 : '';
+            let city = addr.city ? addr.city : ''
+            let state = addr.state ? addr.state : '';
+            let country = addr.country ? addr.country : '';
+            let zipcode = addr.zipcode ? addr.zipcode : '';
+            return addressLine1 + "\n" + addressLine2 + "\n" + city + "\n" + state + "\n" + country + "\n" + zipcode;
+          }
         }
       }
     ]

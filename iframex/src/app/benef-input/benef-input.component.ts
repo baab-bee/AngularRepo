@@ -97,9 +97,8 @@ export class BenefInputComponent implements OnInit {
     const result: BenRequest = Object.assign({}, this.addForm.value);
     this.logger.debug("Beneficiary Form is::" + JSON.stringify(result));
     let observer = this.benReqService.createBenRequest(result);
-    observer.subscribe((response) => {
-      this.response = response;
-      this.logger.debug("recieved" + JSON.stringify(this.response));
+    observer.subscribe((data: BenRequest) => {
+      this.logger.debug("recieved" + JSON.stringify(data));
       //error handling 
       this.showMsg = true;
     });

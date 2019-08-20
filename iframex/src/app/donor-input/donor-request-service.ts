@@ -10,6 +10,7 @@ import { DonorRequest } from './models/donor.request.model';
 @Injectable()
 export class DonRequestService {
     private userRequestUrl = environment.baseUrl + 'donorRequests';
+    private statusUrl = environment.baseUrl + 'donorRequests/search?status=DON_REQ_INITIATED,DON_REQ_PROCESSED';
     constructor(private http: HttpClient, private logger: NGXLogger) {
     }
     httpOptions = {
@@ -17,9 +18,20 @@ export class DonRequestService {
             'Content-Type': 'application/json'
         })
     }
+
     // POST /donorRequest Rest API
     createDonRequest(donRequest): Observable<DonorRequest> {
         return this.http.post<DonorRequest>(this.userRequestUrl, donRequest, this.httpOptions)
+            .pipe(catchError(this.handleError));
+    }
+    // GET  /donorRequest/search API
+    findByStatus() :Observable<DonorRequest>{
+        return this.http.get<DonorRequest>(this.statusUrl, this.httpOptions)
+            .pipe(catchError(this.handleError));
+        };
+
+    updateStatus(id): Observable<DonorRequest> {
+        return this.http.patch<DonorRequest>(this.userRequestUrl+'/'+id, {"status":"DON_REQ_PREPAID_SENT"}, this.httpOptions)
             .pipe(catchError(this.handleError));
     }
 
