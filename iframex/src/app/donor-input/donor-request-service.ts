@@ -10,7 +10,7 @@ import { DonorRequest } from './models/donor.request.model';
 @Injectable()
 export class DonRequestService {
     private userRequestUrl = environment.baseUrl + 'donorRequests';
-    private statusUrl = environment.baseUrl + 'donorRequests/search?status=DON_REQ_INITIATED,DON_REQ_PROCESSED';
+    private statusUrl = environment.baseUrl + 'donorRequests/search?status=DON_REQ_INITIATED,DON_REQ_PREPAID_SENT';
     constructor(private http: HttpClient, private logger: NGXLogger) {
     }
     httpOptions = {

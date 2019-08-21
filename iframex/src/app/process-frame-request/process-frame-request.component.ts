@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ColDef } from 'ag-grid-community';
 import { FrameRequest } from './models/frame.request.model';
 import { FrameRequestService } from './frame-request-service';
-import { DonorComponent } from '../donor/donor.component';
 import { MatchFrameComponent } from '../match-frame/match-frame.component';
 
 @Component({
