@@ -52,13 +52,13 @@ export class ProcessDonorEnvelopeComponent implements OnInit {
     var logger = this.logger;
     var donRequest = this.donRequest;
     var gridApi = this.gridApi;
-    var isMarkAsSent = false;
     selectedRows.forEach(function (selectedRow, index) {
       logger.debug("selected Id" + selectedRow.id);
       let observer = donRequest.updateStatus(selectedRow.id);
       observer.subscribe((data: DonorRequest) => {
         //selected rows  will be removed from grid
-        gridApi.updateRowData({ remove: selectedRows });
+        // var itemsToUpdate = [{"status":"DON_REQ_PREPAID_SENT"}];
+        //  gridApi.updateRowData({ update: itemsToUpdate });
         var status = data["status"];
         logger.debug("Status" + status);
         logger.debug("Response  recieved" + JSON.stringify(data));
