@@ -2,13 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { DonorRequest } from '../donor-input/models/donor.request.model';
 import { ColDef } from 'ag-grid-community';
 import { HttpClient } from '@angular/common/http';
-import { UserRequestService } from './user-request-service';
+import { DonRequestService } from '../donor-input/donor-request-service';
+import { NGXLogger } from 'ngx-logger';
 
 @Component({
   selector: 'app-process-donor-envelope',
   templateUrl: './process-donor-envelope.component.html',
   styleUrls: ['./process-donor-envelope.component.css'],
-  providers: [UserRequestService]
+  providers: [DonRequestService]
 })
 export class ProcessDonorEnvelopeComponent implements OnInit {
   private rowData: DonorRequest;
@@ -17,83 +18,92 @@ export class ProcessDonorEnvelopeComponent implements OnInit {
   private rowSelection;
   private gridApi;
   private gridColumnApi;
+  private getRowHeight;
+  constructor(private donRequest: DonRequestService, private logger: NGXLogger) {
+    this.columnDefs = this.createColumnDefs();
+    this.rowSelection = "single";
 
-    constructor(private userRequest: UserRequestService) {
-      this.columnDefs = this.createColumnDefs();
-      this.rowSelection = "multiple";
-    }
-      // this.http.get('http://localhost:8080/userRequests').subscribe((data)=>{
+    this.getRowHeight = function (params) {
+      var address = params.data.user.address;
+      var length = address.addressLine1.length + address.addressLine2.length + address.city.length + address.state.length + address.zipcode.length + address.country.length;
+      return 28 * (Math.floor(length / 60) + 1);
+    };
+  }
 
-    // this.rowData=data;
-    // });
-    ngOnInit() {
-    this.userRequest.findAll().subscribe(
-      UserRequest => {
-        this.rowData = UserRequest
+  ngOnInit() {
+    this.donRequest.findByStatus().subscribe(
+      DonorRequest => {
+        this.rowData = DonorRequest
       },
       error => {
-        console.log(error);
+        this.logger.debug("Error recieved" + JSON.stringify(error));
       }
     )
-   }
-
-   onSelectionChanged() {
-    var selectedRows = this.gridApi.getSelectedRows();
-    console.log("Hello" + selectedRows);
   }
+
+  /*
+  Invokes the Patch Donor Request Rest API 
+  */
+  markAsSent() {
+    var selectedRows = this.gridApi.getSelectedRows();
+    this.logger.debug("Selected rows" + selectedRows);
+    // Invoking Patch rest API,
+    // Updating the status as "DON_REQ_PREPAID_SENT"
+    var logger = this.logger;
+    var donRequest = this.donRequest;
+    var gridApi = this.gridApi;
+    selectedRows.forEach(function (selectedRow, index) {
+      logger.debug("selected Id" + selectedRow.id);
+      let observer = donRequest.updateStatus(selectedRow.id);
+      observer.subscribe((data: DonorRequest) => {
+        //selected rows  will be removed from grid
+        // var itemsToUpdate = [{"status":"DON_REQ_PREPAID_SENT"}];
+        //  gridApi.updateRowData({ update: itemsToUpdate });
+        var status = data["status"];
+        logger.debug("Status" + status);
+        logger.debug("Response  recieved" + JSON.stringify(data));
+      },
+        error => {
+          logger.debug("Error recieved" + JSON.stringify(error));
+        }
+      )
+    });
+  
+  }
+
 
   onGridReady(params) {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
     this.gridApi.sizeColumnsToFit();
+
   }
 
   private createColumnDefs() {
     return [
-      { field: 'id' ,   checkboxSelection: true },
-      { field: 'status' },
+      { field: 'id', headerName: 'Donor Request ID', resizable: false, checkboxSelection: true },
+      { field: 'status', headerName: 'Status', resizable: false },
       {
-        field: 'name', valueGetter: (params) => {
+        field: 'name', headerName: 'Name', resizable: false, valueGetter: (params) => {
           if (!params.data.user) return '';
           return params.data.user.name;
         }
       },
       {
-        field: 'addressLine1', valueGetter: (params) => {
-          if (!params.data.user || !params.data.user.address || !params.data.user.address.addressLine1) return '';
-          return params.data.user.address.addressLine1;
+        field: 'addressLine1', headerName: 'Address', width: 450, resizable: true, cellStyle: { "white-space": "normal" }, valueGetter: (params) => {
+
+          if (params.data.user && params.data.user.address) {
+            var addr = params.data.user.address;
+            let addressLine1 = addr.addressLine1 ? addr.addressLine1 : '';
+            let addressLine2 = addr.addressLine2 ? addr.addressLine2 : '';
+            let city = addr.city ? addr.city : ''
+            let state = addr.state ? addr.state : '';
+            let country = addr.country ? addr.country : '';
+            let zipcode = addr.zipcode ? addr.zipcode : '';
+            return addressLine1 + "\n" + addressLine2 + "\n" + city + "\n" + state + "\n" + country + "\n" + zipcode;
+          }
         }
-      }, 
-      {
-        field: 'addressLine2', valueGetter: (params) => {
-          if (!params.data.user || !params.data.user.address || !params.data.user.address.addressLine2) return '';
-          return params.data.user.address.addressLine2;
-        }
-      },
-      {
-        field: 'city', valueGetter: (params) => {
-          if (!params.data.user || !params.data.user.address || !params.data.user.address.city) return '';
-          return params.data.user.address.city;
-        }
-      },
-      {
-        field: 'state', valueGetter: (params) => {
-          if (!params.data.user || !params.data.user.address || !params.data.user.address.state) return '';
-          return params.data.user.address.state;
-        }
-      },
-      {
-        field: 'country', valueGetter: (params) => {
-          if (!params.data.user || !params.data.user.address || !params.data.user.address.country) return '';
-          return params.data.user.address.country;
-        }
-      },
-      {
-        field: 'zipcode', valueGetter: (params) => {
-          if (!params.data.user || !params.data.user.address || !params.data.user.address.zipcode) return '';
-          return params.data.user.address.zipcode;
-        }
-      } 
+      }
     ]
   }
 }
