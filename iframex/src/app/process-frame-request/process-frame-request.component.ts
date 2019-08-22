@@ -14,6 +14,8 @@ export class ProcessFrameRequestComponent implements OnInit {
   private rowData :FrameRequest;
   private columnDefs: ColDef[];
   private frameworkComponents;
+  private gridApi;
+  private gridColumnApi;
   constructor(private frameRequest: FrameRequestService) {
     this.columnDefs = this.createColumnDefs();
     this.frameworkComponents = {
@@ -34,6 +36,13 @@ export class ProcessFrameRequestComponent implements OnInit {
       }
     )
   }
+
+  onGridReady(params) {
+    this.gridApi = params.api;
+    this.gridColumnApi = params.columnApi;
+   // this.gridApi.sizeColumnsToFit();
+  }
+
   private createColumnDefs(){
     return [
        {headerName: 'Frame Id', field: 'id'},
@@ -41,7 +50,8 @@ export class ProcessFrameRequestComponent implements OnInit {
        {headerName: 'Size', field: 'size'},
        {headerName: 'Color', field: 'color'},
        {headerName: 'Material', field: 'material'},
-       {headerName: 'Action' , field: "value", cellRenderer: "matchframeComponent",  colId: "params" }
+       {headerName: 'Action' , field: "value",
+       autoHeight: true, cellRenderer: "matchframeComponent",  colId: "params" }
       
     ]
   }
