@@ -21,12 +21,10 @@
   /*Fixed Footer for all pages*/
   .footer {
     position: fixed;
-    left: 0;
     bottom: 0;
     width: 100%;
-    color: grey;
     text-align: center;
- }
+   }
   
   /* Style the top navigation bar */
   .topnav {
@@ -86,11 +84,4 @@
     clear: both;
   }
   
-  /* Footer */
-  .footer {
-    padding: 20px;
-    text-align: center;
-    background: #ddd;
-    margin-top: 20px;
-  }
   
