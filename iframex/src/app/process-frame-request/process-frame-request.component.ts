@@ -45,7 +45,7 @@ export class ProcessFrameRequestComponent implements OnInit {
 
   private createColumnDefs(){
     return [
-       {headerName: 'Frame Id', field: 'id'},
+       {headerName: 'Frame Request Id', field: 'id'},
        {headerName: 'Gender', field: 'gender'},
        {headerName: 'Size', field: 'size'},
        {headerName: 'Color', field: 'color'},

@@ -117,13 +117,18 @@
             <!-- <input [formControl]="row.get('size')"> -->
           </td>
           <td>
-              <input  type="color" [formControl]="row.get('color')">
+              <select  [formControl]="row.get('color')">
+                  <option value="black">Black</option>
+                  <option value="silver">Silver</option>
+                  <option value="brown">Brown</option>
+                  <option value="gold">Gold</option>
+                </select>
           </td>
           <td>
              <select [formControl]="row.get('material')">
-             <option>Metal</option>
-             <option>Plastic</option>
-             <option>Fiber</option>
+             <option value="metal">Metal</option>
+             <option value="plastic">Plastic</option>
+             <option value="fiber">Fiber</option>
              </select>
           </td>
           <td>
