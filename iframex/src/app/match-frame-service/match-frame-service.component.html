@@ -1,4 +1,8 @@
-<div style="height: 100%; padding-top: 35px; box-sizing: border-box;">
+ 
+ <div style="padding-top: 10px;padding-left: 870px;">
+  <button  type="button" (click)="markAsMatched()" class="btn btn-outline-secondary">Mark it as Matched</button>
+</div>
+ <div style="height: 100%; padding-top: 10px; box-sizing: border-box;">
   <ag-grid-angular
     #agGrid
     style="width: 1000px; height: 600px;"
@@ -10,10 +14,11 @@
     [enableFilter]="true"
     [pagination]="true"
     [suppressRowClickSelection]="true"
-    [rowSelection]="rowSelection"
-    (selectionChanged)="onSelectionChanged($event)"
     (gridReady)="onGridReady($event)"
+    [rowSelection]="rowSelection"
     [rowData]="rowData"
   ></ag-grid-angular>
-</div>
+</div>  
+
+<!-- name: {{name}} -->
 

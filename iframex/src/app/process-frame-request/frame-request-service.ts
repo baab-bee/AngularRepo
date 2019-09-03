@@ -13,13 +13,21 @@ export class FrameRequestService {
     constructor(private http: HttpClient) {
 
     }
+    httpOptions = {
+        headers: new HttpHeaders({
+            'Content-Type': 'application/json'
+        })
+    }
 
     findAll() :Observable<FrameRequest>{
-        return this.http.get<FrameRequest>(this.frameRequestUrl, {headers : new HttpHeaders({ 'Content-Type': 'application/json' })})
+        return this.http.get<FrameRequest>(this.frameRequestUrl, this.httpOptions)
         .pipe(catchError(this.handleError));
         };
 
-        
+        updateStatus(requestBody): Observable<FrameRequest> {
+            return this.http.patch<FrameRequest>(this.frameRequestUrl+'/'+requestBody.id, requestBody, this.httpOptions)
+                .pipe(catchError(this.handleError));
+        }; 
      handleError(error: HttpErrorResponse) {
         let errorMessage = '';
         if (error.error instanceof ErrorEvent) {
