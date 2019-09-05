@@ -9,7 +9,8 @@ import { catchError } from 'rxjs/operators';
 @Injectable()
 export class FrameRequestService {
     private frameRequestUrl = environment.baseUrl + 'frameRequests/search?status=FRAME_REQ_INITAITED';
-
+    private processedFrameUrl = environment.baseUrl + 'frameRequests/search?status=FRAME_REQ_MATCHED';
+    private fRequestUrl = environment.baseUrl + 'frameRequests';
     constructor(private http: HttpClient) {
 
     }
@@ -23,11 +24,14 @@ export class FrameRequestService {
         return this.http.get<FrameRequest>(this.frameRequestUrl, this.httpOptions)
         .pipe(catchError(this.handleError));
         };
-
-        updateStatus(requestBody): Observable<FrameRequest> {
-            return this.http.patch<FrameRequest>(this.frameRequestUrl+'/'+requestBody.id, requestBody, this.httpOptions)
-                .pipe(catchError(this.handleError));
-        }; 
+    findbyStatus(): Observable<FrameRequest> {
+        return this.http.get<FrameRequest>(this.processedFrameUrl, this.httpOptions)
+            .pipe(catchError(this.handleError));
+    };
+    updateStatus(id): Observable<FrameRequest> {
+        return this.http.patch<FrameRequest>(this.fRequestUrl+'/'+id, {"status":"FRAME_REQ_PROCESSED"}, this.httpOptions)
+            .pipe(catchError(this.handleError));
+    }
      handleError(error: HttpErrorResponse) {
         let errorMessage = '';
         if (error.error instanceof ErrorEvent) {
