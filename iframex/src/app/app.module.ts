@@ -17,6 +17,7 @@ import { ProcessFrameRequestComponent } from './process-frame-request/process-fr
 import { MatchFrameComponent } from './match-frame/match-frame.component';
 import { MatchFrameServiceComponent } from './match-frame-service/match-frame-service.component';
 import { ProcessDonationComponent } from './process-donation/process-donation.component';
+import { AlertComponent } from './alert/alert.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { ProcessDonationComponent } from './process-donation/process-donation.co
     ProcessFrameRequestComponent,
     MatchFrameComponent,
     MatchFrameServiceComponent,
-    ProcessDonationComponent
+    ProcessDonationComponent,
+    AlertComponent
   ],
   entryComponents: [MatchFrameComponent],
   imports: [

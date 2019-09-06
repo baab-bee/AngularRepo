@@ -7,6 +7,7 @@ import { Address } from './models/address.model';
 import { environment } from '../../environments/environment';
 import { NGXLogger } from 'ngx-logger';
 import { DonRequestService } from './donor-request-service';
+import { AlertService } from '../alert/alert.service';
 
 
 @Component({
@@ -19,10 +20,10 @@ export class DonorInputComponent implements OnInit {
   donorForm: FormGroup;
   response: any;
   baseUrl = environment.baseUrl;
-  showMsg: boolean = false;
+  //showMsg: boolean = false;
   submitted = false;
-  @ViewChild('alert') alert: ElementRef;
-  constructor(private formBuilder: FormBuilder, private donService: DonRequestService, private logger: NGXLogger) {
+ // @ViewChild('alert') alert: ElementRef;
+  constructor(private formBuilder: FormBuilder, private donService: DonRequestService, private logger: NGXLogger, private alertService: AlertService) {
     //Creating the form group with model
   
   }
@@ -60,11 +61,13 @@ export class DonorInputComponent implements OnInit {
   get m() {return this.donorForm.get('user.address.zipcode');}
   get n() {return this.donorForm.get('user.address.country');}
 
-  closeAlert() {
-    this.alert.nativeElement.classList.remove('show');
-  }
+  // closeAlert() {
+  //   this.alert.nativeElement.classList.remove('show');
+  // }
   onSubmit() {
     this.submitted =true;
+     // reset alerts on submit
+     this.alertService.clear();
     if (this.donorForm.invalid) {
       return;
   }
@@ -77,11 +80,15 @@ export class DonorInputComponent implements OnInit {
     // this.logger.debug("Donor Form Post URL is::"+url);
     let observer = this.donService.createDonRequest(result);
     // let observer = this.http.post(url,result,{headers : new HttpHeaders({ 'Content-Type': 'application/json' })});
-    observer.subscribe((response) => {
+    observer.subscribe(
+      response => {
       this.response = response;
       this.logger.debug("recieved" + JSON.stringify(this.response));
       //error handling 
-      this.showMsg = true;
-    });
+     // this.showMsg = true;
+     this.alertService.success('Success! Data Submitted Successfully!', true);
+    },  error => {
+      this.alertService.error(error);
+  });
   }
 }
