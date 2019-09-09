@@ -18,6 +18,8 @@ import { MatchFrameComponent } from './match-frame/match-frame.component';
 import { MatchFrameServiceComponent } from './match-frame-service/match-frame-service.component';
 import { ProcessDonationComponent } from './process-donation/process-donation.component';
 import { AlertComponent } from './alert/alert.component';
+import { DropoffComponent } from './dropoff/Dropoff.component';
+import { SelfPaidEnvelopeComponent } from './selfPaidEnvelope/SelfPaidEnvelope.component';
 
 
 @NgModule({
@@ -34,7 +36,10 @@ import { AlertComponent } from './alert/alert.component';
     MatchFrameComponent,
     MatchFrameServiceComponent,
     ProcessDonationComponent,
-    AlertComponent
+    AlertComponent,
+    MatchFrameServiceComponent,
+    DropoffComponent,
+    SelfPaidEnvelopeComponent
   ],
   entryComponents: [MatchFrameComponent],
   imports: [

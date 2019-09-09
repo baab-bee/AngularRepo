@@ -10,6 +10,8 @@ import { ReceiveAndValidateComponent } from './ReceiveAndValidate/ReceiveAndVali
 import { ProcessDonationComponent } from './process-donation/process-donation.component';
 import { ProcessFrameRequestComponent } from './process-frame-request/process-frame-request.component';
 import { MatchFrameServiceComponent } from './match-frame-service/match-frame-service.component';
+import { DropoffComponent } from './dropoff/Dropoff.component';
+import { SelfPaidEnvelopeComponent } from './selfPaidEnvelope/SelfPaidEnvelope.component';
 
 const routes: Routes = [
   {path:'', redirectTo:'/home', pathMatch:'full'},
@@ -22,7 +24,9 @@ const routes: Routes = [
   {path:'receiveAndValidate', component:ReceiveAndValidateComponent},
   {path:'processFrame', component:ProcessFrameRequestComponent},
   {path:'processDonation', component:ProcessDonationComponent},
-  {path:'matchFrame', component: MatchFrameServiceComponent}
+  {path:'matchFrame', component: MatchFrameServiceComponent},
+  {path:'dropoff', component: DropoffComponent},
+  {path:'selfPaidEnvelope', component: SelfPaidEnvelopeComponent}
 ];
 
 @NgModule({

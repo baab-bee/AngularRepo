@@ -29,12 +29,9 @@ export class DonorComponent {
       this.router.navigate(['../donor']);
     }
     else if (this.radioSelectedValue == 'dropoff_location') {
-      //this.alerts.setMessage('dropoff error','error');                                     
-      alert("Please go to drop off location")
-      return false;
-    } else {
-      alert("Please go to home page")
-      return false;
+       this.router.navigate(['../dropoff']);
+} else {
+    this.router.navigate(['../selfPaidEnvelope']);
     }
     //navigate to the donor-input screen
   }

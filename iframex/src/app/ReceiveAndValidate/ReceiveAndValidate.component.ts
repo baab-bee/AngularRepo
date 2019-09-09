@@ -3,38 +3,51 @@ import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {Frame} from './frame.model';
+import { NGXLogger } from 'ngx-logger';
 //import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-
+import { ReceiveAndValidateService } from './ReceiveAndValidate-service';
 
 @Component({
   selector: 'app-ReceiveAndValidate',
   templateUrl: './ReceiveAndValidate.component.html',
-  styleUrls: ['./ReceiveAndValidate.component.css']
+  styleUrls: ['./ReceiveAndValidate.component.css'],
+  providers:[ReceiveAndValidateService]
 })
 
 export class ReceiveAndValidateComponent implements OnInit {
 
   rows: FormArray;
   addForm: FormGroup;
-  frameName: string;
-  userRequestId: number;
+  name: string;
+  donRequestId: number;
   size: number;
   material: string;
   color: string;
   gender: string;
-  description: string;
+  remarks: string;
   frames: Array<Frame>;
+  submitted = false;  
+  response: any;
 
   onAddFrame() {
+    //validation
+    if(!this.donRequestId || isNaN(this.donRequestId) || this.donRequestId <= 0){
+      window.alert("Please enter valid Donor Request ID");
+      return;
+    } else if(!this.size){
+      window.alert("Please select valid Frame Size");
+      return;
+    }
     let frame = new Frame();
-    frame.frameName = this.frameName;
-    frame.userRequestId = this.userRequestId;
+    frame.name = this.name;
+    frame.donRequestId = this.donRequestId;
     frame.gender = this.gender;
     frame.color = this.color;
     frame.material = this.material;
     frame.size = this.size;
-    frame.description = this.description;
+    frame.remarks = this.remarks;
     this.frames.push(frame);
+    //TODO validate & check for and duplicates
   }
 
   onRemoveFrame(frame){
@@ -44,7 +57,6 @@ export class ReceiveAndValidateComponent implements OnInit {
 
   onAddRow() {
     this.rows.push(this.createItemFormGroup());
-
   }
 
   onRemoveRow(rowIndex: number) {
@@ -67,7 +79,6 @@ export class ReceiveAndValidateComponent implements OnInit {
   }
 
   createBulkFrames(): FormGroup {
-
     return this.fb.group({
       fnmae: "",
       id: "",
@@ -79,25 +90,32 @@ export class ReceiveAndValidateComponent implements OnInit {
     });
   }
 
-  constructor(private fb: FormBuilder, private http: HttpClient) {
-
+  constructor(private fb: FormBuilder, private http: HttpClient, private logger: NGXLogger, private ReceiveAndValidateService: ReceiveAndValidateService) {
     this.frames = [];
     this.addForm = this.fb.group({
       userRequestType: ['B']
     });
     this.rows = this.fb.array([]);
-
   }
 
   ngOnInit() {
-
-
     this.addForm.addControl('frameRequests', this.rows);
   }
 
+  /*Bulk Api call for Receive and validate screen-- http://localhost:8080/frame/frames-bulk*/
   validateFrames(){
-
+    this.submitted =true;
+    if (this.frames.length == 0) {
+      window.alert("Add atleast one frame to validate");
+      return;
+    }
+    this.logger.debug("receive and validate frames request ::" + JSON.stringify(this.frames));
+    let observer = this.ReceiveAndValidateService.validateRequest(this.frames);
+    
+    observer.subscribe((response) => {
+      this.response = response;
+      this.logger.debug("response" + JSON.stringify(this.response));
+      window.alert("Data Submitted Successfully!");
+    });
   }
-
 }
-

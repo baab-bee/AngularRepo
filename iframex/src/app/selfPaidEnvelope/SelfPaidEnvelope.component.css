@@ -1,0 +1,15 @@
+.center {
+  text-align: center;
+
+ 
+}
+
+.message{
+
+position: absolute;
+  top: 50%;
+  left: 30%;
+  margin-top: -50px;
+  margin-left: -50px;
+  
+}

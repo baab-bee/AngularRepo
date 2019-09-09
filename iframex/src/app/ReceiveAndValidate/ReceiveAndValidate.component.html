@@ -1,15 +1,15 @@
 <body>
-
     <div class="container">
         <div class="form-group">
             <label for="fname">Frame Name:</label>
-            <input type="text" class="form-control" id="fname" placeholder="Enter name" name="fname"
-                [(ngModel)]="frameName">
+            <input type="text" class="form-control" id="fname" placeholder="Enter Frame Name" name="fname"
+                [(ngModel)]="name">
         </div>
         <div class="form-group">
-            <label for="pwd">UserRequestID:</label>
-            <input type="id" class="form-control" id="id" placeholder="Enter ID" name="id" [(ngModel)]="userRequestId">
+            <label for="pwd">DonorRequestID:</label>
+            <input type="id" class="form-control" id="id" placeholder="Enter Donor Request ID" name="id" [(ngModel)]="donRequestId">
         </div>
+       
         <div class="form-group">
             <div class="dropdown">
                 <label>Frame Size:</label>
@@ -24,10 +24,9 @@
             <div class="dropdown">
                 <label>Frame Color:</label>
                 <select  [(ngModel)]="color">
-                    <option value="small">Black</option>
-                    <option value="medium">Silver</option>
-                    <option value="large">Gold</option>
-                    <option value="large">Brown</option>
+                    <option value="black">Black</option>
+                    <option value="silver">Silver</option>
+                    <option value="gold">Gold</option>
                 </select>
             </div>
         </div>
@@ -35,9 +34,8 @@
             <div class="dropdown">
                 <label>Material: </label>
                 <select  [(ngModel)]="material">
-
-                    <option value="small">Fiber</option>
-                    <option value="medium">Metal</option>
+                    <option value="fiber">Fiber</option>
+                    <option value="metal">Metal</option>
                 </select>
             </div>
         </div>
@@ -45,15 +43,15 @@
             <div class="dropdown">
                 <label>Gender: </label>
                 <select  [(ngModel)]="gender">
-
-                    <option value="small" selected>Male</option>
-                    <option value="medium">Female</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
                 </select>
             </div>
         </div>
+  
         <div class="form-group">
             <label for="comment">Description:</label>
-            <textarea class="form-control" rows="5" id="comment" [(ngModel)]="description"></textarea>
+            <textarea class="form-control" rows="5" id="comment" placeholder="Enter Description" [(ngModel)]="remarks"></textarea>
         </div>
 
         <div id="table-scroll">
@@ -61,7 +59,7 @@
                 <thead class="thead-light">
                     <!-- <label   class="col-form-label">Frame Details</label> -->
                     <tr>
-                        <button (click)="onAddFrame()" *ngIf="addForm.get('frameRequests')">Add Frame</button>
+                        <button (click)="onAddFrame()" *ngIf="addForm.get('frameRequests')">Frame Details</button>
                     </tr>
                     <tr>
                         <th>Frame Name</th>
@@ -76,29 +74,20 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let frame of frames">
-                        <td>{{ frame.frameName }}</td>
-                        <td>{{ frame.userRequestId }}</td>
+                        <td>{{ frame.name }}</td>
+                        <td>{{ frame.donRequestId }}</td>
                         <td>{{ frame.gender }}</td>
                         <td>{{ frame.size }}</td>
                         <td>{{ frame.color }}</td>
                         <td>{{ frame.material }}</td>
-                        <td>{{ frame.description }}</td>
+                        <td>{{ frame.remarks }}</td>
                         <td>
                             <button (click)="onRemoveFrame(frame)">Remove</button>
                         </td>
                     </tr>
                 </tbody>
             </table>
-
+            <button type="submit" class="btn btn-primary" (click)="validateFrames()">Validate</button>
         </div>
-
-
-
-
-
-        <button type="submit" class="btn btn-primary" (click)="validateFrames()">Validate</button>
-
-
     </div>
-
 </body>
