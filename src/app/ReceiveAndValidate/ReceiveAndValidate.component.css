@@ -1,5 +1,5 @@
 #table-scroll {
-    height:100px;
+    height:200px;
     overflow:auto;  
     margin-top:20px;
   }
@@ -9,3 +9,12 @@
     height: 110px;
     overflow: auto;
   }
+  .block {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+  }
+.outer{display:inline-block;}
+.one {width:80px; height:80px;}
+.two {width:80px; height:80px;}
+.three {width:80px; height:100px;}

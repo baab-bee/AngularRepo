@@ -76,7 +76,6 @@ export class ProcessDonorEnvelopeComponent implements OnInit {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
     this.gridApi.sizeColumnsToFit();
-
   }
 
   private createColumnDefs() {

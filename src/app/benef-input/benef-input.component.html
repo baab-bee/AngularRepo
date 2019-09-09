@@ -117,13 +117,18 @@
             <!-- <input [formControl]="row.get('size')"> -->
           </td>
           <td>
-              <input  type="color" [formControl]="row.get('color')">
+              <select  [formControl]="row.get('color')">
+                  <option value="black">Black</option>
+                  <option value="silver">Silver</option>
+                  <option value="brown">Brown</option>
+                  <option value="gold">Gold</option>
+                </select>
           </td>
           <td>
              <select [formControl]="row.get('material')">
-             <option>Metal</option>
-             <option>Plastic</option>
-             <option>Fiber</option>
+             <option value="metal">Metal</option>
+             <option value="plastic">Plastic</option>
+             <option value="fiber">Fiber</option>
              </select>
           </td>
           <td>
@@ -136,16 +141,9 @@
   </div>
 <div>
   <button type="submit" class="btn btn-primary  ml-3">Submit</button>
-  <button type="reset" class="btn btn-primary  ml-3">Cancel</button>
+  <button type="reset" class="btn btn-primary  ml-3">Reset</button>
 </div>
 </div> 
-  <div class="row"  *ngIf="showMsg">
-      <div  #alert class="alert alert-success alert-dismissible fade show" role="alert">
-          <strong>Success! Data Submitted Successfully!</strong>
-          <button type="button" class="close" aria-label="Close" (click)="closeAlert()"> 
-            <span aria-hidden="true">&times;</span></button> 
-    </div>
-  </div>
 </form>
   <!-- </div> -->
  

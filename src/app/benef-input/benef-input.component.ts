@@ -5,6 +5,7 @@ import { environment } from '../../environments/environment';
 import { NGXLogger } from 'ngx-logger';
 import { BenRequestService } from './benef-request-service';
 import { BenRequest } from './models/ben.request.model';
+import { AlertService } from '../alert/alert.service';
 
 @Component({
   selector: 'app-benef-input',
@@ -21,10 +22,10 @@ export class BenefInputComponent implements OnInit {
   baseUrl = environment.baseUrl;
   response: any;
   submitted = false;
-  showMsg: boolean = false;
+ // showMsg: boolean = false;
   showFrame: boolean = false;
-  @ViewChild('alert') alert: ElementRef;
-  constructor(private fb: FormBuilder, private logger: NGXLogger, private benReqService: BenRequestService) {
+ // @ViewChild('alert') alert: ElementRef;
+  constructor(private fb: FormBuilder, private logger: NGXLogger, private alertService: AlertService,private benReqService: BenRequestService) {
     this.addForm = this.fb.group({
       remarks: new FormControl( ''),
       status: new FormControl('BEN_REQ_INITIATED')
@@ -86,9 +87,9 @@ export class BenefInputComponent implements OnInit {
   get l() {return this.addressForm.get('state');}
   get m() {return this.addressForm.get('zipcode');}
   get n() {return this.addressForm.get('country');}
-  closeAlert() {
-    this.alert.nativeElement.classList.remove('show');
-  }
+  // closeAlert() {
+  //   this.alert.nativeElement.classList.remove('show');
+  // }
   onSubmit() {
     this.submitted =true;
     if (this.addForm.invalid) {
@@ -99,9 +100,10 @@ export class BenefInputComponent implements OnInit {
     let observer = this.benReqService.createBenRequest(result);
     observer.subscribe((data: BenRequest) => {
       this.logger.debug("recieved" + JSON.stringify(data));
-      //error handling 
-      this.showMsg = true;
-    });
+      this.alertService.success('Success! Data Submitted Successfully!', true);
+    },  error => {
+      this.alertService.error(error);
+  });
 
 
   }

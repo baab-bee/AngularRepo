@@ -13,10 +13,13 @@ import { AdminComponent } from './admin/admin.component';
 import { ProcessDonorEnvelopeComponent } from './process-donor-envelope/process-donor-envelope.component';
 import { BenefInputComponent } from './benef-input/benef-input.component';
 import { ReceiveAndValidateComponent } from './ReceiveAndValidate/ReceiveAndValidate.component';
-import { processDonationRequest } from './processDonationRequest/processDonationRequest.component';
 import { ProcessFrameRequestComponent } from './process-frame-request/process-frame-request.component';
 import { MatchFrameComponent } from './match-frame/match-frame.component';
 import { MatchFrameServiceComponent } from './match-frame-service/match-frame-service.component';
+import { ProcessDonationComponent } from './process-donation/process-donation.component';
+import { AlertComponent } from './alert/alert.component';
+import { DropoffComponent } from './dropoff/Dropoff.component';
+import { SelfPaidEnvelopeComponent } from './selfPaidEnvelope/SelfPaidEnvelope.component';
 
 
 @NgModule({
@@ -29,10 +32,14 @@ import { MatchFrameServiceComponent } from './match-frame-service/match-frame-se
     ProcessDonorEnvelopeComponent,
     BenefInputComponent,
     ReceiveAndValidateComponent,
-    processDonationRequest,
     ProcessFrameRequestComponent,
     MatchFrameComponent,
-    MatchFrameServiceComponent
+    MatchFrameServiceComponent,
+    ProcessDonationComponent,
+    AlertComponent,
+    MatchFrameServiceComponent,
+    DropoffComponent,
+    SelfPaidEnvelopeComponent
   ],
   entryComponents: [MatchFrameComponent],
   imports: [
