@@ -14,9 +14,11 @@
             <div class="dropdown">
                 <label>Frame Size:</label>
                 <select  [(ngModel)]="size">
-                    <option value="small">Small</option>
-                    <option value="medium">Medium</option>
-                    <option value="large">Large</option>
+                    <option value="XS">XS</option>      
+                  <option value="S">S</option>
+                  <option value="L">L</option>
+                  <option value="M">M</option>
+                  <option value="XL">XL</option>
                 </select>
             </div>
         </div>
@@ -25,8 +27,9 @@
                 <label>Frame Color:</label>
                 <select  [(ngModel)]="color">
                     <option value="black">Black</option>
-                    <option value="silver">Silver</option>
-                    <option value="gold">Gold</option>
+                  <option value="silver">Silver</option>
+                  <option value="brown">Brown</option>
+                  <option value="gold">Gold</option>
                 </select>
             </div>
         </div>
@@ -34,8 +37,9 @@
             <div class="dropdown">
                 <label>Material: </label>
                 <select  [(ngModel)]="material">
-                    <option value="fiber">Fiber</option>
                     <option value="metal">Metal</option>
+             <option value="plastic">Plastic</option>
+             <option value="fiber">Fiber</option>
                 </select>
             </div>
         </div>
