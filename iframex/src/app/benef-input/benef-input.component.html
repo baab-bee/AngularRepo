@@ -3,7 +3,7 @@
   <div class="col-md-5">
   <div [formGroup]="userForm">
     <div class="form-group required">
-        <label for="formUserName" class="control-label col-form-label col-form-label-sm">User Name</label>
+        <label for="formUserName" class="control-label col-form-label col-form-label-sm">Full Name</label>
         <input type="text" class="form-control form-control-sm" id="formUserName" formControlName="name"
           placeholder="Enter Your Name" [ngClass]="{ 'is-invalid': submitted && f.errors }" />
           <div *ngIf="submitted && f.errors" class="invalid-feedback">
