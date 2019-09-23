@@ -6,6 +6,7 @@ import { NGXLogger } from 'ngx-logger';
 import { BenRequestService } from './benef-request-service';
 import { BenRequest } from './models/ben.request.model';
 import { AlertService } from '../alert/alert.service';
+import { ModalService } from '../modal.service';
 
 @Component({
   selector: 'app-benef-input',
@@ -22,10 +23,11 @@ export class BenefInputComponent implements OnInit {
   baseUrl = environment.baseUrl;
   response: any;
   submitted = false;
+  modalText: string;
  // showMsg: boolean = false;
   showFrame: boolean = false;
  // @ViewChild('alert') alert: ElementRef;
-  constructor(private fb: FormBuilder, private logger: NGXLogger, private alertService: AlertService,private benReqService: BenRequestService) {
+  constructor(private fb: FormBuilder, private logger: NGXLogger, private alertService: AlertService,private benReqService: BenRequestService,private modalService: ModalService) {
     this.addForm = this.fb.group({
       remarks: new FormControl( ''),
       status: new FormControl('BEN_REQ_INITIATED')
@@ -100,11 +102,24 @@ export class BenefInputComponent implements OnInit {
     let observer = this.benReqService.createBenRequest(result);
     observer.subscribe((data: BenRequest) => {
       this.logger.debug("recieved" + JSON.stringify(data));
-      this.alertService.success('Success! Data Submitted Successfully!', true);
+     // this.alertService.success('Success! Data Submitted Successfully!', true);
+     this.modalText = "Thankyou for Dononating Eye Frames to IFramex Organisation!";
+     this.openModal();
     },  error => {
-      this.alertService.error(error);
+     // this.alertService.error(error);
+     this.modalText = error;
+      this.openModal();
   });
 
 
   }
+
+  openModal() {
+    
+    this.modalService.open('custom-modal-1');
+}
+
+closeModal(id: string) {
+    this.modalService.close(id);
+}
 }

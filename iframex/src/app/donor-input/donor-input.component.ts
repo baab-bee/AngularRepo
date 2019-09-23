@@ -8,6 +8,7 @@ import { environment } from '../../environments/environment';
 import { NGXLogger } from 'ngx-logger';
 import { DonRequestService } from './donor-request-service';
 import { AlertService } from '../alert/alert.service';
+import { ModalService } from '../modal.service';
 
 
 @Component({
@@ -22,8 +23,9 @@ export class DonorInputComponent implements OnInit {
   baseUrl = environment.baseUrl;
   //showMsg: boolean = false;
   submitted = false;
+  modalText: string;
  // @ViewChild('alert') alert: ElementRef;
-  constructor(private formBuilder: FormBuilder, private donService: DonRequestService, private logger: NGXLogger, private alertService: AlertService) {
+  constructor(private formBuilder: FormBuilder, private donService: DonRequestService, private logger: NGXLogger, private alertService: AlertService, private modalService: ModalService) {
     //Creating the form group with model
   
   }
@@ -86,9 +88,21 @@ export class DonorInputComponent implements OnInit {
       this.logger.debug("recieved" + JSON.stringify(this.response));
       //error handling 
      // this.showMsg = true;
-     this.alertService.success('Success! Data Submitted Successfully!', true);
+     //this.alertService.success('Success! Data Submitted Successfully!', true);
+     this.modalText = "Thankyou for Dononating Eye Frames to IFramex Organisation!";
+     this.openModal();
     },  error => {
-      this.alertService.error(error);
+      //this.alertService.error(error);
+      this.modalText = error;
+      this.openModal();
   });
   }
+
+  openModal() {
+    this.modalService.open('custom-modal-1');
+}
+
+closeModal(id: string) {
+    this.modalService.close(id);
+}
 }

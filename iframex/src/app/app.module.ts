@@ -20,7 +20,8 @@ import { ProcessDonationComponent } from './process-donation/process-donation.co
 import { AlertComponent } from './alert/alert.component';
 import { DropoffComponent } from './dropoff/Dropoff.component';
 import { SelfPaidEnvelopeComponent } from './selfPaidEnvelope/SelfPaidEnvelope.component';
-
+import { ModalComponent } from './modal.component';
+import { ModalService } from './modal.service';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { SelfPaidEnvelopeComponent } from './selfPaidEnvelope/SelfPaidEnvelope.c
     AlertComponent,
     MatchFrameServiceComponent,
     DropoffComponent,
-    SelfPaidEnvelopeComponent
+    SelfPaidEnvelopeComponent,
+    ModalComponent
   ],
   entryComponents: [MatchFrameComponent],
   imports: [
@@ -54,7 +56,7 @@ import { SelfPaidEnvelopeComponent } from './selfPaidEnvelope/SelfPaidEnvelope.c
       disableConsoleLogging: false
     })
   ],
-  providers: [],
+  providers: [ModalService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
