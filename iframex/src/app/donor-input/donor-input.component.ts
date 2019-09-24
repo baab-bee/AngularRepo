@@ -72,8 +72,7 @@ export class DonorInputComponent implements OnInit {
      this.alertService.clear();
     if (this.donorForm.invalid) {
       return;
-  }
-
+  } 
     const result: DonorRequest = Object.assign({}, this.donorForm.value);
     result.user = Object.assign({}, result.user);
     result.user.address = Object.assign({}, result.user.address);
@@ -86,11 +85,14 @@ export class DonorInputComponent implements OnInit {
       response => {
       this.response = response;
       this.logger.debug("recieved" + JSON.stringify(this.response));
+      this.donorForm = this.createFormGroupWithBuilderAndModel(this.formBuilder);
+      this.submitted = false;
       //error handling 
      // this.showMsg = true;
      //this.alertService.success('Success! Data Submitted Successfully!', true);
      this.modalText = "Thankyou for Dononating Eye Frames to IFramex Organisation!";
      this.openModal();
+
     },  error => {
       //this.alertService.error(error);
       this.modalText = error;
