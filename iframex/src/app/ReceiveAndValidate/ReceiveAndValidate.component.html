@@ -1,22 +1,29 @@
 <body>
     <div class="container">
         <div class="form-group">
-            <label for="fname">Frame Name:</label>
+            <label for="fname" class="control-label">Frame Name:</label>
             <input type="text" class="form-control" id="fname" placeholder="Enter Frame Name" name="fname"
-                [(ngModel)]="name">
+                [(ngModel)]="name" [ngClass]="{ 'is-invalid': submitted && n.errors }" placeholder="Enter your Country" >
+               
+                  <div *ngIf="submitted && n.errors" class="invalid-feedback">
+                    <div *ngIf="n.errors.required">Country is required</div>
+                </div>
+
         </div>
         <div class="form-group">
-            <label for="pwd">DonorRequestID:</label>
+            <label for="pwd" class="control-label">DonorRequestID:</label>
             <input type="id" class="form-control" id="id" placeholder="Enter Donor Request ID" name="id" [(ngModel)]="donRequestId">
         </div>
        
         <div class="form-group">
             <div class="dropdown">
-                <label>Frame Size:</label>
+                <label class="control-label">Frame Size:</label>
                 <select  [(ngModel)]="size">
-                    <option value="small">Small</option>
-                    <option value="medium">Medium</option>
-                    <option value="large">Large</option>
+                    <option value="XS">XS</option>      
+                    <option value="S">S</option>
+                    <option value="L">M</option>
+                    <option value="M">L</option>
+                    <option value="XL">XL</option>
                 </select>
             </div>
         </div>
@@ -41,7 +48,7 @@
         </div>
         <div class="form-group">
             <div class="dropdown">
-                <label>Gender: </label>
+                <label >Gender: </label>
                 <select  [(ngModel)]="gender">
                     <option value="male">Male</option>
                     <option value="female">Female</option>

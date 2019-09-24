@@ -99,3 +99,19 @@
     </div>
   </div> -->
 </form>
+
+<custom-modal id="custom-modal-1">
+  <h4>{{modalText}}</h4>
+  <div style="text-align:center;"><button (click)="closeModal('custom-modal-1');">Close</button></div>
+</custom-modal>
+
+<!--
+  The view then calls the methods exposed by the controller in the usual way:
+
+<div class="col-md-6 col-md-offset-3">
+    <h1>Home</h1>
+    <p>{{bodyText}}</p>
+    <button (click)="openModal('custom-modal-1')">Open Modal 1</button>
+    <button (click)="openModal('custom-modal-2')">Open Modal 2</button>
+</div>
+-->

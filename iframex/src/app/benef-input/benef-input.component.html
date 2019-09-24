@@ -110,8 +110,8 @@
               <select  [formControl]="row.get('size')">  
                   <option value="XS">XS</option>      
                   <option value="S">S</option>
-                  <option value="L">L</option>
-                  <option value="M">M</option>
+                  <option value="L">M</option>
+                  <option value="M">L</option>
                   <option value="XL">XL</option>
              </select>
             <!-- <input [formControl]="row.get('size')"> -->
@@ -145,6 +145,11 @@
 </div>
 </div> 
 </form>
+
+<custom-modal id="custom-modal-1">
+  <h4>{{modalText}}</h4>
+  <div style="text-align:center;"><button (click)="closeModal('custom-modal-1');">Close</button></div>
+</custom-modal>
   <!-- </div> -->
  
  
