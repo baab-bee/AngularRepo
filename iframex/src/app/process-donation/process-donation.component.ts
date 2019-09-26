@@ -68,33 +68,37 @@ export class ProcessDonationComponent implements OnInit {
   onGridReady(params) {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
-    //this.gridApi.sizeColumnsToFit();
+    // this.getRowHeight = function (params) {
+    //   // assuming 50 characters per line, working how how many lines we need
+    //   return 18 * (Math.floor(params.data.name.length / 45) + 1);
+    // //this.gridApi.sizeColumnsToFit();
   }
   private createColumnDefs() {
     return [
-      { field: 'beneficiaryRequest_id', headerName: 'Beneficiary ID', resizable: false, checkboxSelection: true },
-      { field: 'beneficiary_name', headerName: 'Beneficiary Name', resizable: false },
+      { field: 'beneficiaryRequest_id', width: 150, headerName: 'Beneficiary ID', resizable: false, checkboxSelection: true },
+      { field: 'beneficiary_name', width: 150,headerName: 'Beneficiary Name', resizable: false },
       { field: 'beneficary_address', width: 350, resizable: true, cellStyle: { "white-space": "normal" },headerName: 'Beneficiary Address'},
       {
-        field: 'size', headerName: 'Frame Request Information', width: 200, resizable: true, cellStyle: { "white-space": "normal" }, valueGetter: (params) => {
+        field: 'size', headerName: 'Frame Request Information', width: 400, resizable: true, cellStyle: { "white-space": "normal" }, valueGetter: (params) => {
 
-          
-            let size = params.data.size ? params.data.size : '';
-            let color = params.data.color ? params.data.size: '';
-            let material = params.data.material ? params.data.material : ''
-            let gender = params.data.gender ? params.data.gender : '';
-            return "Size:" + size +",\n" + "Gender:"+gender + ",\n" +"Color:"+color + ",\n" + "Material:"+material;
+            let size = params.data.size ? "Size:"+params.data.size : '';
+            let color = params.data.color ? "Gender:"+params.data.size: '';
+            let material = params.data.material ? "Material:"+params.data.material : '';
+            let gender = params.data.gender ? "Color:"+params.data.gender : '';
+            return size +" " +gender + " " +color + " "+material;
         }
         },
         {
-          field: 'color', headerName: 'Matched Frame Information', width: 200, resizable: true, cellStyle: { "white-space": "normal" }, valueGetter: (params) => {
+          field: 'color', headerName: 'Matched Frame Information', width: 500, resizable: true, cellStyle: { "white-space": "normal"}, valueGetter: (params) => {
             if (params.data.frame) {
               var frame = params.data.frame;
-              let fSize = frame.size ? frame.size : '';
-              let fColor = frame.color ? frame.color : '';
-              let fMaterial =frame.material ? frame.material: ''
-              let fGender = frame.gender ? frame.gender : '';
-              return "Size:" + fSize +",\n" + "Gender:"+fGender + ",\n" +"Color:"+fColor + ",\n" + "Material:"+fMaterial;
+              let fId = frame.id ? "Frame Id:"+frame.id:'';
+              let fName = frame.name ? "Frame Name:" +frame.name:'';
+              let fSize = frame.size ? "Size:" +frame.size : '';
+              let fColor = frame.color ? "Color:"+frame.color : '';
+              let fMaterial =frame.material ? "Material"+frame.material: '';
+              let fGender = frame.gender ? "Gender:"+frame.gender : '';
+              return fName+ " " +fId+ " " + fSize +" " +fGender + " " +fColor + " "+fMaterial;
             }
           }
         }
