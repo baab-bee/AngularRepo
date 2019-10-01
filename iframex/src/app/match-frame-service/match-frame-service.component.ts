@@ -102,6 +102,7 @@ export class MatchFrameServiceComponent implements OnInit {
      updateReq.id = id;
      updateReq.status = "FRAME_REQ_MATCHED";
      updateReq.frame = selectedRow;
+     updateReq.frame.status = "FRAME_MATCHED";
     //   "id": id,;
     //   "status":"FRAME_REQ_MATCHED",
     //   frame: selectedRow
