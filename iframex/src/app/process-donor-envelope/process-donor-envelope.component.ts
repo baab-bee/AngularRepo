@@ -19,6 +19,7 @@ export class ProcessDonorEnvelopeComponent implements OnInit {
   private gridApi;
   private gridColumnApi;
   private getRowHeight;
+  private getRowNodeId;
   constructor(private donRequest: DonRequestService, private logger: NGXLogger) {
     this.columnDefs = this.createColumnDefs();
     this.rowSelection = "single";
@@ -27,6 +28,10 @@ export class ProcessDonorEnvelopeComponent implements OnInit {
       var address = params.data.user.address;
       var length = address.addressLine1.length + address.addressLine2.length + address.city.length + address.state.length + address.zipcode.length + address.country.length;
       return 28 * (Math.floor(length / 60) + 1);
+    };
+
+    this.getRowNodeId = function(data) {
+      return data.id;
     };
   }
 
@@ -56,6 +61,9 @@ export class ProcessDonorEnvelopeComponent implements OnInit {
       logger.debug("selected Id" + selectedRow.id);
       let observer = donRequest.updateStatus(selectedRow.id);
       observer.subscribe((data: DonorRequest) => {
+      // updating the status instatntly
+       var rowNode = gridApi.getRowNode(selectedRow.id);
+       rowNode.setDataValue("status","DON_REQ_PREPAID_SENT");
         //selected rows  will be removed from grid
         // var itemsToUpdate = [{"status":"DON_REQ_PREPAID_SENT"}];
         //  gridApi.updateRowData({ update: itemsToUpdate });
@@ -76,6 +84,7 @@ export class ProcessDonorEnvelopeComponent implements OnInit {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
     this.gridApi.sizeColumnsToFit();
+    
   }
 
   private createColumnDefs() {
