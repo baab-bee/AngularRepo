@@ -36,7 +36,7 @@ export class DonorInputComponent implements OnInit {
   // This method instantiate the donor form
   createFormGroupWithBuilderAndModel(formBuilder: FormBuilder) {
     return formBuilder.group({
-      envelopeSize: [''] ,
+      envelopeSize: ['', Validators.required] ,
       status: 'DON_REQ_INITIATED',
       user: formBuilder.group({
         name: ['', Validators.required] ,
@@ -69,7 +69,7 @@ export class DonorInputComponent implements OnInit {
   onSubmit() {
     this.submitted =true;
      // reset alerts on submit
-     this.alertService.clear();
+    // this.alertService.clear();
     if (this.donorForm.invalid) {
       return;
   } 
@@ -90,7 +90,7 @@ export class DonorInputComponent implements OnInit {
       //error handling 
      // this.showMsg = true;
      //this.alertService.success('Success! Data Submitted Successfully!', true);
-     this.modalText = "Thankyou for Dononating Eye Frames to IFramex Organisation!";
+     this.modalText = "Thank you for Dononating Eye Frames to IFramex Organisation!";
      this.openModal();
 
     },  error => {

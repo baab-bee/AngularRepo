@@ -1,9 +1,12 @@
 <form [formGroup]="donorForm" class="ml-2" (ngSubmit)="onSubmit()" novalidate>
-  <div class="form-group">
-    <label for="formFrameCount" class="col-form-label col-form-label-sm">Frame Count</label>
+  <div class="form-group required">
+    <label for="formFrameCount" class="control-label col-form-label col-form-label-sm">Frame Count</label>
     <input type="number" class="form-control form-control-sm col-3" id="formFrameCount" formControlName="envelopeSize"
-      placeholder="Enter total number of frames" />
-  </div>
+      placeholder="Enter total number of frames"  [ngClass]="{ 'is-invalid': submitted && f.errors }" />
+      <div *ngIf="submitted && f.errors" class="invalid-feedback">
+        <div *ngIf="f.errors.required">Number of count to be donated is required</div>
+    </div>
+    </div>
   <div formGroupName="user">
     <div class="form-group required" >
       <label for="formUserName" class="control-label col-form-label col-form-label-sm">Full Name</label>
@@ -34,7 +37,7 @@
     </div>
     <div formGroupName="address" novalidate>
       <div class="form-group required">
-        <label for="formStreet1" class="control-label col-form-label col-form-label-sm">Address</label>
+        <label for="formStreet1" class="control-label col-form-label col-form-label-sm">Address Line 1</label>
         <input type="text" class="form-control form-control-sm col-6" id="formStreet1" formControlName="addressLine1"
         [ngClass]="{ 'is-invalid': submitted && h.errors }" placeholder="Enter Your Street Address" />
           <div *ngIf="submitted && h.errors" class="invalid-feedback">
@@ -43,7 +46,7 @@
       </div>
       <div class="form-row">
         <div class="form-group col-3">
-          <label for="formStreet2" class="col-form-label col-form-label-sm">Address 2</label>
+          <label for="formStreet2" class="col-form-label col-form-label-sm">Address Line 2</label>
           <input type="text" class="form-control form-control-sm" id="formStreet2" formControlName="addressLine2"
             placeholder="Enter Your Street Address 2" />
         </div>
