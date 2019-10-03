@@ -1,5 +1,5 @@
 #table-scroll {
-    height:200px;
+    height:400px;
     overflow:auto;  
     margin-top:20px;
   }
@@ -19,7 +19,7 @@
 .two {width:80px; height:80px;}
 .three {width:80px; height:100px;}
 
-.form-group .control-label:after {
+.form-group.required .control-label:after {
   content:"*";
   color:red;
 }

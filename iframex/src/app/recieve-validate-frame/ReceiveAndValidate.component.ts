@@ -17,7 +17,7 @@ import { ReceiveAndValidateService } from './ReceiveAndValidate-service';
 export class ReceiveAndValidateComponent implements OnInit {
 
   rows: FormArray;
-  addForm: FormGroup;
+ //addForm: FormGroup;
   name: string;
   donRequestId: number;
   size: number;
@@ -31,10 +31,11 @@ export class ReceiveAndValidateComponent implements OnInit {
 
   onAddFrame() {
     //validation
-    if(!this.donRequestId || isNaN(this.donRequestId) || this.donRequestId <= 0){
-      window.alert("Please enter valid Donor Request ID");
-      return;
-    } else if(!this.size){
+    // if(!this.donRequestId || isNaN(this.donRequestId) || this.donRequestId <= 0){
+    //   window.alert("Please enter valid Donor Request ID");
+    //   return;
+    // } else
+     if(!this.size){
       window.alert("Please select valid Frame Size");
       return;
     }
@@ -55,67 +56,32 @@ export class ReceiveAndValidateComponent implements OnInit {
     this.frames.splice(index,1);
   }
 
-  onAddRow() {
-    this.rows.push(this.createItemFormGroup());
-  }
-
-  onRemoveRow(rowIndex: number) {
-    this.rows.removeAt(rowIndex);
-  }
-
-  createItemFormGroup(): FormGroup {
-    return this.fb.group({
-      fnmae: "",
-      id: "",
-      gender: "",
-      size: "",
-      color: "",
-      material: "",
-      comment: ""
-    });
-  }
-  getFrameDetails() {
-    this.rows.push(this.createBulkFrames());
-  }
-
-  createBulkFrames(): FormGroup {
-    return this.fb.group({
-      fnmae: "",
-      id: "",
-      gender: "",
-      size: "",
-      color: "",
-      material: "",
-      comment: ""
-    });
-  }
-
   constructor(private fb: FormBuilder, private http: HttpClient, private logger: NGXLogger, private ReceiveAndValidateService: ReceiveAndValidateService) {
     this.frames = [];
-    this.addForm = this.fb.group({
-      userRequestType: ['B']
-    });
-    this.rows = this.fb.array([]);
   }
 
   ngOnInit() {
-    this.addForm.addControl('frameRequests', this.rows);
+   // this.addForm.addControl('frameRequests', this.rows);
+   //this.addForm = this.buildForm(this.fb);
   }
-
   /*Bulk Api call for Receive and validate screen-- http://localhost:8080/frame/frames-bulk*/
   validateFrames(){
-    this.submitted =true;
+    this.submitted = true;
     if (this.frames.length == 0) {
       window.alert("Add atleast one frame to validate");
       return;
     }
     this.logger.debug("receive and validate frames request ::" + JSON.stringify(this.frames));
     let observer = this.ReceiveAndValidateService.validateRequest(this.frames);
-    
     observer.subscribe((response) => {
       this.response = response;
+    
       this.logger.debug("response" + JSON.stringify(this.response));
+    
       window.alert("Data Submitted Successfully!");
     });
+  
+  
+    
   }
 }

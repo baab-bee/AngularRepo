@@ -144,7 +144,6 @@ export class BenefInputComponent implements OnInit {
 
   }
   openModal() {
-
     this.modalService.open('custom-modal-1');
   }
 
