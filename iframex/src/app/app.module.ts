@@ -12,7 +12,7 @@ import { AgGridModule } from 'ag-grid-angular';
 import { AdminComponent } from './admin/admin.component';
 import { ProcessDonorEnvelopeComponent } from './process-donor-envelope/process-donor-envelope.component';
 import { BenefInputComponent } from './benef-input/benef-input.component';
-import { ReceiveAndValidateComponent } from './ReceiveAndValidate/ReceiveAndValidate.component';
+import { ReceiveAndValidateComponent } from './recieve-validate-frame/ReceiveAndValidate.component';
 import { ProcessFrameRequestComponent } from './process-frame-request/process-frame-request.component';
 import { MatchFrameComponent } from './match-frame/match-frame.component';
 import { MatchFrameServiceComponent } from './match-frame-service/match-frame-service.component';
