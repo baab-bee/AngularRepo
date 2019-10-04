@@ -1,7 +1,7 @@
 export class Frame {
     name:String;
-    donRequestId:number;
-    size:number;
+    donRequestId:String;
+    size:String;
     color:String;
     material:String;
     gender:String;
