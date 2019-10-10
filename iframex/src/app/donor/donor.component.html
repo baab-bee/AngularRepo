@@ -1,6 +1,7 @@
 
-
-
+<section class="hero is-fullheight">
+<div class="hero-body">
+    <div class="container">
 <form   [formGroup] = "donorComp" class="form-list-radio" (ngSubmit) = "onClickSubmit(donorComp.value)">
   <div class="custom-control custom-radio">
     <input type="radio" class="custom-control-input"   formControlName="donorCompOpts" id="exampleRadios1" value="prepaid_envelope"> 
@@ -17,6 +18,9 @@
   </div>
   <div  class="col-md-12  text-center"><button type="submit"  class="btn btn-primary" [disabled] = "!donorComp.valid" >OK</button></div>
 </form>
+</div>
+</div>
+</section>
 <!--<p>
   Selected value : {{radioSelectedValue}}
 </p>
