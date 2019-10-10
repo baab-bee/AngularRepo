@@ -3,7 +3,7 @@
   <div class="col-md-5">
   <div [formGroup]="userForm">
     <div class="form-group required">
-        <label for="formUserName" class="control-label col-form-label col-form-label-sm">User Name</label>
+        <label for="formUserName" class="control-label col-form-label col-form-label-sm">Full Name</label>
         <input type="text" class="form-control form-control-sm" id="formUserName" formControlName="name"
           placeholder="Enter Your Name" [ngClass]="{ 'is-invalid': submitted && f.errors }" />
           <div *ngIf="submitted && f.errors" class="invalid-feedback">
@@ -110,8 +110,8 @@
               <select  [formControl]="row.get('size')">  
                   <option value="XS">XS</option>      
                   <option value="S">S</option>
-                  <option value="L">L</option>
-                  <option value="M">M</option>
+                  <option value="L">M</option>
+                  <option value="M">L</option>
                   <option value="XL">XL</option>
              </select>
             <!-- <input [formControl]="row.get('size')"> -->
@@ -141,10 +141,14 @@
   </div>
 <div>
   <button type="submit" class="btn btn-primary  ml-3">Submit</button>
-  <button type="reset" class="btn btn-primary  ml-3">Reset</button>
 </div>
 </div> 
 </form>
+
+<custom-modal id="custom-modal-1">
+  <h4>{{modalText}}</h4>
+  <div style="text-align:center;"><button (click)="closeModal('custom-modal-1');">Close</button></div>
+</custom-modal>
   <!-- </div> -->
  
  

@@ -12,7 +12,7 @@ import { AgGridModule } from 'ag-grid-angular';
 import { AdminComponent } from './admin/admin.component';
 import { ProcessDonorEnvelopeComponent } from './process-donor-envelope/process-donor-envelope.component';
 import { BenefInputComponent } from './benef-input/benef-input.component';
-import { ReceiveAndValidateComponent } from './ReceiveAndValidate/ReceiveAndValidate.component';
+import { ReceiveAndValidateComponent } from './recieve-validate-frame/ReceiveAndValidate.component';
 import { ProcessFrameRequestComponent } from './process-frame-request/process-frame-request.component';
 import { MatchFrameComponent } from './match-frame/match-frame.component';
 import { MatchFrameServiceComponent } from './match-frame-service/match-frame-service.component';
@@ -20,7 +20,8 @@ import { ProcessDonationComponent } from './process-donation/process-donation.co
 import { AlertComponent } from './alert/alert.component';
 import { DropoffComponent } from './dropoff/Dropoff.component';
 import { SelfPaidEnvelopeComponent } from './selfPaidEnvelope/SelfPaidEnvelope.component';
-
+import { ModalComponent } from './modal.component';
+import { ModalService } from './modal.service';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { SelfPaidEnvelopeComponent } from './selfPaidEnvelope/SelfPaidEnvelope.c
     AlertComponent,
     MatchFrameServiceComponent,
     DropoffComponent,
-    SelfPaidEnvelopeComponent
+    SelfPaidEnvelopeComponent,
+    ModalComponent
   ],
   entryComponents: [MatchFrameComponent],
   imports: [
@@ -54,7 +56,7 @@ import { SelfPaidEnvelopeComponent } from './selfPaidEnvelope/SelfPaidEnvelope.c
       disableConsoleLogging: false
     })
   ],
-  providers: [],
+  providers: [ModalService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

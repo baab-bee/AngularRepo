@@ -35,8 +35,7 @@ constructor(public router: Router){
 navigate() {
   // this.router.navigate(['other']);
   console.log("Rowww" +JSON.stringify(this.params.data));
-  this.router.navigate(['../matchFrame'], {
-    state: this.params.data
-  });
+  this.router.navigate(['../matchFrame'],
+   { skipLocationChange:true, state: this.params.data});
 }
 }

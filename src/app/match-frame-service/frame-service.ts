@@ -25,7 +25,14 @@ export class FrameService {
         };
 
     updateStatus(requestBody): Observable<FrameRequest> {
-            return this.http.patch<FrameRequest>(this.frameRequestUrl+'/'+requestBody.id, requestBody, this.httpOptions)
+        // updating the frame status
+        // console.log("this.frameUrl+'/'+requestBody.frame.id"+this.frameUrl+'/'+requestBody.frame.id);
+        //      this.http.patch<Frame>(this.frameUrl+'/'+requestBody.frame.id, {"status":"FRAME_MATCHED"}, this.httpOptions)
+        //         .subscribe((res)=>{
+        //             console.log(res);
+        //         });;
+        // updating the frameRequest status
+            return  this.http.patch<FrameRequest>(this.frameRequestUrl+'/'+requestBody.id, requestBody, this.httpOptions)
                 .pipe(catchError(this.handleError));
     }; 
          // POST /donorRequest Rest API
