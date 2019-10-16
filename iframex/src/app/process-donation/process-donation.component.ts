@@ -82,9 +82,9 @@ export class ProcessDonationComponent implements OnInit {
         field: 'size', headerName: 'Frame Request Information', width: 400, resizable: true, cellStyle: { "white-space": "normal" }, valueGetter: (params) => {
 
             let size = params.data.size ? "Size:"+params.data.size : '';
-            let color = params.data.color ? "Gender:"+params.data.size: '';
+            let color = params.data.color ? "Gender:"+params.data.gender: '';
             let material = params.data.material ? "Material:"+params.data.material : '';
-            let gender = params.data.gender ? "Color:"+params.data.gender : '';
+            let gender = params.data.gender ? "Color:"+params.data.color : '';
             return size +" " +gender + " " +color + " "+material;
         }
         },
@@ -96,7 +96,7 @@ export class ProcessDonationComponent implements OnInit {
               let fName = frame.name ? "Frame Name:" +frame.name:'';
               let fSize = frame.size ? "Size:" +frame.size : '';
               let fColor = frame.color ? "Color:"+frame.color : '';
-              let fMaterial =frame.material ? "Material"+frame.material: '';
+              let fMaterial =frame.material ? "Material:"+frame.material: '';
               let fGender = frame.gender ? "Gender:"+frame.gender : '';
               return fName+ " " +fId+ " " + fSize +" " +fGender + " " +fColor + " "+fMaterial;
             }
