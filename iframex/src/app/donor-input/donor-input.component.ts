@@ -90,7 +90,7 @@ export class DonorInputComponent implements OnInit {
       //error handling 
      // this.showMsg = true;
      //this.alertService.success('Success! Data Submitted Successfully!', true);
-     this.modalText = "Thank you for Dononating Eye Frames to IFramex Organisation!";
+     this.modalText = "Thank you for Dononating Eye Frames to IFramex Organization!";
      this.openModal();
 
     },  error => {
