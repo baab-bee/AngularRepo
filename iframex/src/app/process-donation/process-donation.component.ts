@@ -82,9 +82,9 @@ export class ProcessDonationComponent implements OnInit {
         field: 'size', headerName: 'Frame Request Information', width: 400, resizable: true, cellStyle: { "white-space": "normal" }, valueGetter: (params) => {
 
             let size = params.data.size ? "Size:"+params.data.size : '';
-            let color = params.data.color ? "Gender:"+params.data.gender: '';
+            let color = params.data.color ? "Color:"+params.data.color: '';
             let material = params.data.material ? "Material:"+params.data.material : '';
-            let gender = params.data.gender ? "Color:"+params.data.color : '';
+            let gender = params.data.gender ? "Gender:"+params.data.gender : '';
             return size +" " +gender + " " +color + " "+material;
         }
         },
