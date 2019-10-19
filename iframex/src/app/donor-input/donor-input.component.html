@@ -1,3 +1,5 @@
+<section class="hero is-medium-with-navbar">
+  <div class="hero-body">
 <form [formGroup]="donorForm" class="ml-2" (ngSubmit)="onSubmit()" novalidate>
   <div class="form-group required">
     <label for="formFrameCount" class="control-label col-form-label col-form-label-sm">Frame Count</label>
@@ -107,7 +109,8 @@
   <h4>{{modalText}}</h4>
   <div style="text-align:center;"><button (click)="closeModal('custom-modal-1');">Close</button></div>
 </custom-modal>
-
+  </div>
+</section>
 <!--
   The view then calls the methods exposed by the controller in the usual way:
 
