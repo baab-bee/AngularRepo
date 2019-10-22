@@ -16,12 +16,13 @@ export class ProcessFrameRequestComponent implements OnInit {
   private frameworkComponents;
   private gridApi;
   private gridColumnApi;
+  private domLayout;
   constructor(private frameRequest: FrameRequestService) {
     this.columnDefs = this.createColumnDefs();
     this.frameworkComponents = {
     matchframeComponent: MatchFrameComponent
     };
-
+    this.domLayout = "autoHeight";
    }
 
   ngOnInit() {
@@ -40,7 +41,7 @@ export class ProcessFrameRequestComponent implements OnInit {
   onGridReady(params) {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
-   // this.gridApi.sizeColumnsToFit();
+    this.gridApi.sizeColumnsToFit();
   }
 
   private createColumnDefs(){

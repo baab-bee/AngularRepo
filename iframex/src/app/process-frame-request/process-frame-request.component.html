@@ -1,7 +1,7 @@
-<div style="height: 100%; padding-top: 35px; box-sizing: border-box;">
+<div>
   <ag-grid-angular
+  style="boxSizing: border-box"
     #agGrid
-    style="width: 1200px; height: 500px;"
     id="myGrid"
     class="ag-theme-balham"
     [columnDefs]="columnDefs"
@@ -13,6 +13,7 @@
     [rowSelection]="rowSelection"
     (selectionChanged)="onSelectionChanged($event)"
     (gridReady)="onGridReady($event)"
+    [domLayout]="domLayout"
     [rowData]="rowData"
     [frameworkComponents]="frameworkComponents"
   ></ag-grid-angular>

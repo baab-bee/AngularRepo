@@ -16,10 +16,11 @@ export class ProcessDonationComponent implements OnInit {
   private gridColumnApi;
   private getRowHeight;
   private rowSelection;
+  private domLayout;
   constructor(private frameRequests:FrameRequestService, private logger: NGXLogger) {
     this.columnDefs = this.createColumnDefs();
     this.rowSelection = "single";
-
+    this.domLayout = "autoHeight";
     this.getRowHeight = function (params) {
       var address = params.data.beneficary_address;
       var length = address.length;
@@ -71,15 +72,15 @@ export class ProcessDonationComponent implements OnInit {
     // this.getRowHeight = function (params) {
     //   // assuming 50 characters per line, working how how many lines we need
     //   return 18 * (Math.floor(params.data.name.length / 45) + 1);
-    // //this.gridApi.sizeColumnsToFit();
+    this.gridApi.sizeColumnsToFit();
   }
   private createColumnDefs() {
     return [
-      { field: 'beneficiaryRequest_id', width: 150, headerName: 'Beneficiary ID', resizable: false, checkboxSelection: true },
-      { field: 'beneficiary_name', width: 150,headerName: 'Beneficiary Name', resizable: false },
-      { field: 'beneficary_address', width: 350, resizable: true, cellStyle: { "white-space": "normal" },headerName: 'Beneficiary Address'},
+      { field: 'beneficiaryRequest_id',  headerName: 'Beneficiary ID', resizable: false, checkboxSelection: true },
+      { field: 'beneficiary_name', headerName: 'Beneficiary Name', resizable: false },
+      { field: 'beneficary_address', resizable: true, cellStyle: { "white-space": "normal" },headerName: 'Beneficiary Address'},
       {
-        field: 'size', headerName: 'Frame Request Information', width: 400, resizable: true, cellStyle: { "white-space": "normal" }, valueGetter: (params) => {
+        field: 'size', headerName: 'Frame Request Information', resizable: true, cellStyle: { "white-space": "normal" }, valueGetter: (params) => {
 
             let size = params.data.size ? "Size:"+params.data.size : '';
             let color = params.data.color ? "Color:"+params.data.color: '';
@@ -89,7 +90,7 @@ export class ProcessDonationComponent implements OnInit {
         }
         },
         {
-          field: 'color', headerName: 'Matched Frame Information', width: 500, resizable: true, cellStyle: { "white-space": "normal"}, valueGetter: (params) => {
+          field: 'color', headerName: 'Matched Frame Information',  resizable: true, cellStyle: { "white-space": "normal"}, valueGetter: (params) => {
             if (params.data.frame) {
               var frame = params.data.frame;
               let fId = frame.id ? "Frame Id:"+frame.id:'';
