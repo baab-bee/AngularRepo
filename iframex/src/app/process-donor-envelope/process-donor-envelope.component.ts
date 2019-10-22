@@ -20,10 +20,11 @@ export class ProcessDonorEnvelopeComponent implements OnInit {
   private gridColumnApi;
   private getRowHeight;
   private getRowNodeId;
+  private domLayout;
   constructor(private donRequest: DonRequestService, private logger: NGXLogger) {
     this.columnDefs = this.createColumnDefs();
     this.rowSelection = "single";
-
+    this.domLayout = "autoHeight";
     this.getRowHeight = function (params) {
       var address = params.data.user.address;
       var length = address.addressLine1.length + address.addressLine2.length + address.city.length + address.state.length + address.zipcode.length + address.country.length;
@@ -98,7 +99,7 @@ export class ProcessDonorEnvelopeComponent implements OnInit {
         }
       },
       {
-        field: 'addressLine1', headerName: 'Address', width: 450, resizable: true, cellStyle: { "white-space": "normal" }, valueGetter: (params) => {
+        field: 'addressLine1', headerName: 'Address',  resizable: true, cellStyle: { "white-space": "normal" }, valueGetter: (params) => {
 
           if (params.data.user && params.data.user.address) {
             var addr = params.data.user.address;
