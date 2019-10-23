@@ -6,10 +6,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
+  public show:boolean = false;
+  public buttonName:any = 'Read more..';
   constructor() { }
 
   ngOnInit() {
   }
-
+  toggle() {
+    this.show = !this.show;
+  }
 }

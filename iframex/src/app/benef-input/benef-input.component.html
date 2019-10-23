@@ -1,4 +1,5 @@
-
+<section class="hero is-medium-with-navbar">
+  <div class="hero-body">
 <form [formGroup]="addForm"  (ngSubmit)="onSubmit()">
   <div class="col-md-5">
   <div [formGroup]="userForm">
@@ -89,13 +90,14 @@
 			<thead class="thead-light">
           <!-- <label   class="col-form-label">Frame Details</label> -->
         <tr>
-        <button  type="button" [disabled]="showFrame" (click)="onAddRow()" *ngIf="addForm.get('frameRequests')">Add Frame</button>
+        <button  type="button"  class="btn btn-secondary btn-sm" [disabled]="showFrame" (click)="onAddRow()" *ngIf="addForm.get('frameRequests')">Add Frame</button>
         </tr>
         <tr>    
           <th>Gender</th>    
           <th>Size</th>    
           <th>Color</th>    
-          <th>Material</th>    
+          <th>Material</th>  
+          <th></th>  
       </tr> 
 			</thead>
 			<tbody>
@@ -132,7 +134,7 @@
              </select>
           </td>
           <td>
-            <button  type="button" (click)="onRemoveRow(index)">Remove</button>
+            <button  type="button"  class="btn btn-secondary btn-sm" (click)="onRemoveRow(index)">Remove</button>
           </td>
 				</tr>
 			</tbody>
@@ -145,7 +147,8 @@
 </div>
 </div> 
 </form>
-
+</div>
+</section>
 <custom-modal id="custom-modal-1">
   <h4>{{modalText}}</h4>
   <div style="text-align:center;"><button (click)="closeModal('custom-modal-1');">Close</button></div>
