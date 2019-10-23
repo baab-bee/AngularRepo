@@ -95,8 +95,14 @@ body {
 } */
 
 .hero {
-  background-image: url('/assets/img/canyon.jpg') !important;
+  background-image: url('/assets/img/homed.jpg') !important;
   background-size: cover;
   background-position: center center;
   background-color: azure;
+  color:whitesmoke;
+  font-size: bold;
+  text-align: justify;
+}
+a {
+  color: yellow;
 }
