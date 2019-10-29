@@ -1,0 +1,23 @@
+a, u {
+    text-decoration: none;
+}
+
+h3 {
+    font-family:Lucida Sans Unicode;
+}
+h1 {
+    font-family:Arial;
+}
+.navbar-item.is-hoverable:focus-within{
+    color: gray;
+}
+.navbar-dropdown{
+    background-color:#ffdd57;
+    font-size: 16px;
+}
+.navbar-item.is-hoverable:hover .navbar-dropdown {
+    display: block !important;
+}
+.navbar-item.is-hoverable:focus-within .navbar-dropdown {
+    display: none;
+}

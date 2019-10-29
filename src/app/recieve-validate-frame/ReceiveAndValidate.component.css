@@ -1,14 +1,13 @@
-#table-scroll {
-    height:400px;
+  #table-scroll {
     overflow:auto;  
     margin-top:20px;
-  }
+  }  
   .div {
     background-color: lightblue;
     width: 110px;
     height: 110px;
     overflow: auto;
-  }
+  } 
   .block {
     width: 100%;
     display: flex;
@@ -23,3 +22,14 @@
   content:"*";
   color:red;
 }
+
+.hero  {
+background-color:#e6e6e6;
+}
+.container {
+  background-color:#e6e6e6;
+}
+.table {
+  background-color:lightblue;
+}
+.control-label {font-weight:bold; color:#593b2a}

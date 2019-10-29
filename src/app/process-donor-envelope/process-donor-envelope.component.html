@@ -1,10 +1,9 @@
-<div style="padding-top: 10px;padding-left: 870px;">
-  <button  type="button" (click)="markAsSent()" class="btn btn-outline-secondary">Mark it as Sent</button>
+<div style="margin-bottom: 5px; margin-top: 5px; margin-right: 10px;text-align: right;">
+  <button  type="button" (click)="markAsSent()" class="btn btn-outline-info">Mark it as Sent</button>
 </div>
-<div style="height: 100%; padding-top: 10px; box-sizing: border-box;">
+<div>
   <ag-grid-angular
     #agGrid
-    style="width: 1000px; height: 600px;"
     id="myGrid"
     class="ag-theme-balham"
     [columnDefs]="columnDefs"
@@ -16,6 +15,7 @@
     [rowSelection]="rowSelection"
     [getRowHeight]="getRowHeight"
     [getRowNodeId]="getRowNodeId"
+    [domLayout]="domLayout"
     (gridReady)="onGridReady($event)"
     [rowData]="rowData"
   ></ag-grid-angular>

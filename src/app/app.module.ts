@@ -22,6 +22,8 @@ import { DropoffComponent } from './dropoff/Dropoff.component';
 import { SelfPaidEnvelopeComponent } from './selfPaidEnvelope/SelfPaidEnvelope.component';
 import { ModalComponent } from './modal.component';
 import { ModalService } from './modal.service';
+import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,9 @@ import { ModalService } from './modal.service';
     MatchFrameServiceComponent,
     DropoffComponent,
     SelfPaidEnvelopeComponent,
-    ModalComponent
+    ModalComponent,
+    HeaderComponent,
+    FooterComponent
   ],
   entryComponents: [MatchFrameComponent],
   imports: [

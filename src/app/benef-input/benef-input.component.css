@@ -14,3 +14,12 @@
     content:"*";
     color:red;
   }
+  .hero {
+    background-image: url('/assets/img/frames.jpg') !important;
+    background-repeat: no-repeat;
+background-position: right 10px top 0px;
+background-color:#e6e6e6;
+  }
+  form label {font-weight:bold; color:#593b2a}
+  table th {font-weight:bold; color:#593b2a ; background-color: darkgrey;}
+  table  {background-color:#e6e6e6; font-weight:bold;}

@@ -1,4 +1,4 @@
-<head>
+<!-- <head>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
     integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 </head>
@@ -15,4 +15,32 @@
     <a routerLink="../beneficiary">NEED FRAMES</a>
     <a routerLink="../admin">ADMIN LOGIN</a>
   </div>
-</body>
+</body> -->
+
+<section class="hero is-info is-fullheight is-bold">
+    <div class="hero-body">
+    <div class="container">
+      <!-- <img src="assets/img/iframex.jpg">  -->
+ 
+      <h1>Iframe-X is an Eyeglass frames donation management Software</h1>
+      <br><br>
+      <h2>Wondering what to do with your used Eyeglass frames? <br> Don't throw them away!</h2>
+      <br>
+      <div class="container" [class.show]="show"> 
+      <h3>Iframe-X aids automating the collection of used Eyeglass frame donations, 
+        distributing them to the people who can't effort to buy.
+        <p *ngIf="show">
+        NGO's/Admins operation is hastle free now. Our Software manages to get the 
+        matching frames based on beneficiary requirement which helps NGO/Admin to make faster and better decision on distributing the 
+        eyeglass frames to the people who can't afford it. <br>
+        Donor can donate used Eyeglass frames smoothly and efficiently. They can opt for pre-enveloped, drop off or seld paid pre-envelope
+        as per thier comfort. <br>
+        Beneficiery who can't afford to have Eyeglass frame  can freely provode thier requirement an recieve well conditioned frame inshort span of time.
+      </p>
+      </h3>
+    
+      <button (click)="show = !show">{{ show ? 'Show less': 'Show More' }}</button>
+    </div>
+    </div>
+    </div>
+    </section>
