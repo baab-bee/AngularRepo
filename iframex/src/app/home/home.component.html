@@ -21,14 +21,14 @@
     <div class="hero-body">
     <div class="container">
       <!-- <img src="assets/img/iframex.jpg">  -->
+ 
       <h1>Iframe-X is an Eyeglass frames donation management Software</h1>
       <br><br>
       <h2>Wondering what to do with your used Eyeglass frames? <br> Don't throw them away!</h2>
-      <br><h3>Iframe-X aids automating the collection of used Eyeglass frame donations, 
+      <br>
+      <div class="container" [class.show]="show"> 
+      <h3>Iframe-X aids automating the collection of used Eyeglass frame donations, 
         distributing them to the people who can't effort to buy.
-         <button (click)="toggle()" id="bt">
-            Read more...
-        </button> <br>
         <p *ngIf="show">
         NGO's/Admins operation is hastle free now. Our Software manages to get the 
         matching frames based on beneficiary requirement which helps NGO/Admin to make faster and better decision on distributing the 
@@ -38,6 +38,9 @@
         Beneficiery who can't afford to have Eyeglass frame  can freely provode thier requirement an recieve well conditioned frame inshort span of time.
       </p>
       </h3>
+    
+      <button (click)="show = !show">{{ show ? 'Show less': 'Show More' }}</button>
+    </div>
     </div>
     </div>
     </section>

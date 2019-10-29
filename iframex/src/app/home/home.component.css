@@ -98,11 +98,15 @@ body {
   background-image: url('/assets/img/homed.jpg') !important;
   background-size: cover;
   background-position: center center;
-  background-color: azure;
-  color:whitesmoke;
-  font-size: bold;
+  background-color:grey;
+  color:darkred;
+  font-size: bolder;
   text-align: justify;
 }
 a {
   color: yellow;
 }
+
+ p,h3 {
+   color:whitesmoke;
+ }
