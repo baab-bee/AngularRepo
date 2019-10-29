@@ -103,10 +103,41 @@ body {
   font-size: bolder;
   text-align: justify;
 }
+h1 {
+   -webkit-text-stroke: 1px darkviolet;
+  color:red;
+  font-size :50px;
+  text-shadow:
+      3px 3px 0 darkviolet,
+    -1px -1px 0 darkviolet,  
+     1px -1px 0 darkviolet,
+     -1px 1px 0 darkviolet,
+      1px 1px 0 darkviolet; 
+     
+}
+h2 {
+  -webkit-text-stroke: 1px red;
+  color:yellow;
+  font-size :40px;
+  text-shadow:
+  3px 3px 0 red,
+-1px -1px 0 red,  
+ 1px -1px 0 red,
+ -1px 1px 0 red,
+  1px 1px 0 red; 
+
+}
 a {
   color: yellow;
 }
 
  p,h3 {
-   color:whitesmoke;
+  -webkit-text-stroke: 1px red;
+  color:yellow;
+  text-shadow:
+  3px 3px 0 red,
+-1px -1px 0 red,  
+ 1px -1px 0 red,
+ -1px 1px 0 red,
+  1px 1px 0 red; 
  }
