@@ -15,5 +15,8 @@ position: absolute;
 }
 
 .hero {
-  background-color:#e6e6e6;
-  }
+  background-image: url('/assets/img/frames.jpg') !important;
+  background-repeat: no-repeat;
+background-position: right 10px top 0px;
+background-color:#e6e6e6;
+}

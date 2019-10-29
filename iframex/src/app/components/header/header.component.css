@@ -8,6 +8,9 @@ h3 {
 h1 {
     font-family:Arial;
 }
+.navbar-item.is-hoverable:focus-within{
+    color: gray;
+}
 .navbar-dropdown{
     background-color:#ffdd57;
     font-size: 16px;
