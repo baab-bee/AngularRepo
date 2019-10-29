@@ -2,6 +2,10 @@
 @import 'ag-grid-community/dist/styles/ag-grid.css';
 @import 'ag-grid-community/dist/styles/ag-theme-balham.css';
 @import "~bootstrap/dist/css/bootstrap.css";
+.ag-header-cell-label{
+  font-weight: bold;
+} 
+
 /* MODAL STYLES
 -------------------------------*/
   custom-modal {
