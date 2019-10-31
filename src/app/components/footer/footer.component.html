@@ -2,9 +2,13 @@
     <div class="container">
     <div class="content has-text-centered">
       <p>
-        <a>About</a> | Help | Contact Us <br>
+        <a (click)="aboutUs()">About</a> | <a (click)="help()">Help</a> | <a (click)="contactUs()">Contact Us</a> <br>
         Designed and Owned by The BaaB-Bee Team
       </p>
     </div>
     </div>
     </footer>
+    <custom-modal id="custom-modal-1">
+      <h4><div [innerHTML]="modalText"></div></h4>
+      <div style="text-align:center;"><button (click)="closeModal('custom-modal-1');">Close</button></div>
+    </custom-modal>
