@@ -26,7 +26,7 @@ export class FooterComponent implements OnInit {
   }
 
   help(){
-    window.open("https://www.google.com", "_blank");
+    window.open("https://baabee421152059.wordpress.com/", "_blank");
   }
 
   openModal() {
