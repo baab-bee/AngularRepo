@@ -101,7 +101,7 @@ export class DonorInputComponent implements OnInit {
   }
 
   openModal() {
-    this.modalService.open('custom-modal-1');
+    this.modalService.open('custom-modal-2');
 }
 
 closeModal(id: string) {

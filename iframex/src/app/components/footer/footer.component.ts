@@ -30,7 +30,7 @@ export class FooterComponent implements OnInit {
   }
 
   openModal() {
-    this.modalService.open('custom-modal-1');
+    this.modalService.open('custom-modal-3');
   }
 
   closeModal(id: string) {
