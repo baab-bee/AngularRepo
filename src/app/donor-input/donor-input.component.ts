@@ -90,7 +90,7 @@ export class DonorInputComponent implements OnInit {
       //error handling 
      // this.showMsg = true;
      //this.alertService.success('Success! Data Submitted Successfully!', true);
-     this.modalText = "Thank you for Dononating Eye Frames to IFramex Organization!";
+     this.modalText = "Thank you for Donating Eye Frames to IFramex Organization!";
      this.openModal();
 
     },  error => {
@@ -101,7 +101,7 @@ export class DonorInputComponent implements OnInit {
   }
 
   openModal() {
-    this.modalService.open('custom-modal-1');
+    this.modalService.open('custom-modal-2');
 }
 
 closeModal(id: string) {

@@ -16,7 +16,7 @@ export class FooterComponent implements OnInit {
   }
 
   aboutUs() {
-    this.modalText = "Iframe-X aids automating the collection of used Eyeglass frame donations, distributing them to the people who can't effort to buy. NGO's/Admins operation is hastle free now. Our Software manages to get the matching frames based on beneficiary requirement which helps NGO/Admin to make faster and better decision on distributing the eyeglass frames to the people who can't afford it. <br> Donor can donate used Eyeglass frames smoothly and efficiently. They can opt for pre-enveloped, drop off or seld paid pre-envelope as per thier comfort. <br> Beneficiery who can't afford to have Eyeglass frame  can freely provode thier requirement an recieve well conditioned frame inshort span of time.";
+    this.modalText = "Iframe-X aids automating the collection of used Eyeglass frame donations, distributing them to the people who can't effort to buy. NGO's/Admins operation is hassle free now. Our Software manages to get the matching frames based on beneficiary requirement which helps NGO/Admin to make faster and better decision on distributing the eyeglass frames to the people who can't afford it. <br> Donor can donate used Eyeglass frames smoothly and efficiently. They can opt for pre-envelope, drop off or self paid envelope as per their comfort. <br> Beneficiary who can't afford to have Eyeglass frame  can freely provide their requirement an receive well conditioned frame in-short span of time.";
     this.openModal();
   }
 
@@ -30,7 +30,7 @@ export class FooterComponent implements OnInit {
   }
 
   openModal() {
-    this.modalService.open('custom-modal-1');
+    this.modalService.open('custom-modal-3');
   }
 
   closeModal(id: string) {
