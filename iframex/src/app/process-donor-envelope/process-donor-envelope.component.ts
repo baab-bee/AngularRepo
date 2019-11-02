@@ -92,6 +92,7 @@ export class ProcessDonorEnvelopeComponent implements OnInit {
     return [
       { field: 'id', headerName: 'Donor Request ID', resizable: false, checkboxSelection: true },
       { field: 'status', headerName: 'Status', resizable: false },
+      {field:'envelopeSize',headername:'Frame Count',resizable: false  },
       {
         field: 'name', headerName: 'Name', resizable: false, valueGetter: (params) => {
           if (!params.data.user) return '';
